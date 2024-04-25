@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/login_screen.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/signup_screen.dart';
+import 'package:raudhatul_muhabbah/screens/login_screen.dart';
+import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/splash_screen.dart';
 
 class AppRoutes {

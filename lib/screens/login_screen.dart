@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/signup_screen.dart';
+import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/btn_primary.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';

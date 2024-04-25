@@ -11,8 +11,12 @@ class MyColors {
   static const Color greyMediumColor = Color(0xFFC6C5CA);
   static const Color lightGreyColor = Color(0xFFF0EFF5);
   static const Color extraLightGreyColor = Color(0xFFF3F3F3);
-  static const Color colorPrimary = Color(0xFF8FF100);
+  // static const Color colorPrimary = Color(0xFF8FF100);
+  static const Color colorPrimary = Color(0xFF059669);
+  static const Color colorPrimaryAccent = Color(0xFFA7F3D0);
+  static const Color salutationHistoryBackground = Color(0xFFD1FAE5);
   static const Color colorBlue = Color(0xFF3B82F6);
+  static const Color colorBlueAccent = Color(0xFFBFDBFE);
 
   static const Gradient blackGradiant = LinearGradient(
       begin: Alignment.topCenter,

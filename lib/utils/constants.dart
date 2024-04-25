@@ -21,4 +21,23 @@ class Constants {
   static const String titleGender = "Select Gender";
   static const String btnSubmitTitle= "Submit";
   static const String alreadyAccountInfo = "Am in | LogIn";
+
+  //History screen
+  static const String historyTitle = "History";
+  static const String salutationsTitle = "Salutations";
+  static const String total = "Total:";
+  static const String lastEntries = "Last ___ Entries";
+  static const String lastUpdate = "Last Update";
+  static const String salutationHistory = "Salutation History";
+  static const String key = "KEY";
+  static const String targets = "Targets";
+  static const String achievement = "Achievement";
+
+  //History screen
+  static const String profileTitle = "Profile";
+  static const String resetPassword = "Re-Set Password";
+
+  //History screen
+  static const String editProfile = "Edit Profile";
+  static const String submitTitle = "Submit";
 }

@@ -15,6 +15,7 @@ class PrimaryButton extends StatelessWidget {
   final Widget? trailingChild;
   final bool enabled;
   final EdgeInsetsGeometry? padding;
+  final BorderRadius? borderRadius;
 
 
   const PrimaryButton({
@@ -31,6 +32,7 @@ class PrimaryButton extends StatelessWidget {
     this.leadingChild,
     this.trailingChild,
     this.padding,
+    this.borderRadius,
   });
 
   @override
@@ -41,7 +43,7 @@ class PrimaryButton extends StatelessWidget {
         fillColor: backgroundColor,
         elevation: 0.0,
         highlightElevation: 0.0,
-        shape: RoundedRectangleBorder(side: BorderSide(color: borderColor), borderRadius: BorderRadius.circular(5.0),),
+        shape: RoundedRectangleBorder(side: BorderSide(color: borderColor), borderRadius: borderRadius ?? BorderRadius.circular(5.0),),
         onPressed: enabled ? onPressed : null,
         padding: EdgeInsets.zero,
         constraints: const BoxConstraints(minHeight: 0.0, minWidth: 0.0),

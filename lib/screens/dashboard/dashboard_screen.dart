@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/signup_screen.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/btn_primary.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/history_screen.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/profile_screen.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
-import 'package:raudhatul_muhabbah/utils/constants.dart';
-import 'package:raudhatul_muhabbah/utils/my_styles.dart';
+import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -18,6 +16,16 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  late List<Widget> list;
+  var index = 0;
+  @override
+  void initState() {
+    super.initState();
+    list = [
+      const HistoryScreen(),
+      const ProfileScreen(),
+    ];
+  }
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -29,61 +37,105 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
 
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(backgroundColor: Colors.transparent),
+      extendBodyBehindAppBar: false,
+      appBar: WidgetFunction.awnAppBar(
+        leading: Image.asset(Images.appLogo),
+        backgroundColor: Colors.transparent,
+        actions: [
+          Container(
+              padding: const EdgeInsets.all(10.0),
+              child: SvgPicture.asset(
+                Images.iconDrawer,
+                height: 30.0,
+                width: 30.0,
+              ))
+        ],
+      ),
       backgroundColor: MyColors.backgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(Images.appLogo,height: 200,width: 200,),
-            Text(Constants.info,style: MyTextStyle.normal.copyWith(color: MyColors.greyAccent,fontWeight: FontWeight.w600,fontSize: 18),),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const MyTextInputField(
-              title: Constants.titleEmail,
-              isLabelRequired: true,
-              hintText: Constants.emailPlaceholder,
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            const MyTextInputField(
-              title:  Constants.titlePassword,
-              isLabelRequired: true,
-              hintText: Constants.passwordPlaceholder,
-            ),
-            const SizedBox(
-              height: 40.0,
-            ),
-            PrimaryButton(
-              title: Constants.buttonTitle,
-              backgroundColor: MyColors.colorBlue,
-              borderColor: Colors.transparent,
-              titleStyle:  MyTextStyle.buttonTitle.copyWith(color: MyColors.whiteColor),
-            ),
-            const SizedBox(
-              height: 20.0,
-            ),
-            Row(
-              children: [
-                const Spacer(),
-                PrimaryButton(
-                  title: Constants.notAccountInfo,
-                  backgroundColor: Colors.transparent,
-                  borderColor: Colors.transparent,
-                  textColor:  MyColors.colorBlue,
-                  onPressed: (){
-                    Get.toNamed(SignupScreen.tag);
-                  },
+      body: list[index],
+      bottomNavigationBar: BottomAppBar(
+        padding: EdgeInsets.zero,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        notchMargin: 5.0,
+        elevation: 5,
+        height: 60.0,
+        color: MyColors.colorPrimary,
+        surfaceTintColor: MyColors.colorPrimary,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    Icons.history,
+                    color: Colors.white,
+                  ),
                 ),
+                onPressed: () {
+                  setState(() {
+                    index = 0;
+                  });
+                },
+              ),
+              Container(),
+              Container(),
+              Container(),
+              IconButton(
+                icon: const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: Icon(
+                    Icons.account_circle_outlined,
+                    color: Colors.white,
+                  ),
+                ),
+                onPressed: () {
+                  setState(() {
+                    index = 1;
+                  });
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        decoration: const BoxDecoration(
+          shape: BoxShape.circle,
+          color: MyColors.colorPrimary,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: FloatingActionButton(
+            onPressed: () async {},
+            isExtended: true,
+            shape: const CircleBorder(),
+            backgroundColor: MyColors.whiteColor,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  Images.iconHome,
 
+                  height: 20.0,
+                  width: 20.0,
+                  color: MyColors.colorPrimary,
+                ),
+                const Flexible(
+                  child: FittedBox(
+                    child: Text(
+                      "Home",
+                      style: TextStyle(color: MyColors.colorPrimary),
+                    ),
+                  ),
+                ),
               ],
-            )
-          ],
+            ),
+          ),
         ),
       ),
     );

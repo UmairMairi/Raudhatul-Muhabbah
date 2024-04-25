@@ -103,7 +103,7 @@ class _MyTextInputFieldState extends State<MyTextInputField> {
                   ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5.0),
                 borderSide: const BorderSide(
-                  color: MyColors.greyAccent,
+                  color: MyColors.colorBlue,
                   width: 1.0,
                 ),
               )
@@ -115,7 +115,7 @@ class _MyTextInputFieldState extends State<MyTextInputField> {
                   ? OutlineInputBorder(
                 borderRadius: BorderRadius.circular(5.0),
                 borderSide: const BorderSide(
-                    color: MyColors.colorPrimary, width: 1.0),
+                    color: MyColors.colorBlue, width: 1.0),
               )
                   : InputBorder.none,
               suffixIcon: widget.image != null

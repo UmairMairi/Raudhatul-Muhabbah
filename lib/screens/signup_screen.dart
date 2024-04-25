@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/login_screen.dart';
+import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/btn_primary.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
@@ -59,6 +57,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: MyTextInputField(
                       title: Constants.titleFirstName,
                       isLabelRequired: true,
+                      keyboardType: TextInputType.text,
                     ),
                   ),
                   SizedBox(width: 10.0,),
@@ -66,6 +65,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: MyTextInputField(
                       title: Constants.titleLastName,
                       isLabelRequired: true,
+                      keyboardType: TextInputType.text,
                     ),
                   ),
                 ],
@@ -79,6 +79,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: MyTextInputField(
                       title:  Constants.titleSignupEmail,
                       isLabelRequired: true,
+                      keyboardType: TextInputType.emailAddress,
                     ),
                   ),
                   SizedBox(width: 10.0,),
@@ -86,6 +87,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: MyTextInputField(
                       title:  Constants.titleAddress,
                       isLabelRequired: true,
+                      keyboardType: TextInputType.streetAddress,
                     ),
                   ),
                 ],
@@ -99,6 +101,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     child: MyTextInputField(
                       title:  Constants.titlePhone,
                       isLabelRequired: true,
+                      keyboardType: TextInputType.phone,
                     ),
                   ),
                   SizedBox(width: 10.0,),
@@ -107,6 +110,7 @@ class _SignupScreenState extends State<SignupScreen> {
                       title:  Constants.titleSignupPassword,
                       isObscure: true,
                       isLabelRequired: true,
+                      keyboardType: TextInputType.visiblePassword,
                     ),
                   ),
                 ],
@@ -117,6 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
               const MyTextInputField(
                 title:  Constants.titleGender,
                 isLabelRequired: true,
+                keyboardType: TextInputType.text,
               ),
               const SizedBox(
                 height: 40.0,
