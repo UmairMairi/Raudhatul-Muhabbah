@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/btn_primary.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';

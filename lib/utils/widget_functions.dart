@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/btn_primary.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/history_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/profile_screen.dart';
+import 'package:raudhatul_muhabbah/screens/widgets/drawrer.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
@@ -38,6 +39,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       extendBodyBehindAppBar: false,
+      drawer: MyDrawer(),
       appBar: WidgetFunction.awnAppBar(
         leading: Image.asset(Images.appLogo),
         backgroundColor: Colors.transparent,
