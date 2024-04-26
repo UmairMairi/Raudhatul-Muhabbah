@@ -22,6 +22,7 @@ class MyTextInputField extends StatefulWidget {
   final String? image;
   final Function? onTap;
   final TextCapitalization textCapitalization;
+  final BorderRadius? borderRadius;
 
   const MyTextInputField(
       {Key? key,
@@ -40,6 +41,7 @@ class MyTextInputField extends StatefulWidget {
         this.onChange,
         this.hintText,
         this.onTap,
+        this.borderRadius,
         this.textCapitalization = TextCapitalization.none,
         this.hintStyle})
       : super(key: key);
@@ -101,7 +103,7 @@ class _MyTextInputFieldState extends State<MyTextInputField> {
                   ? InputBorder.none
                   : widget.showBorder
                   ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: widget.borderRadius ?? BorderRadius.circular(5.0),
                 borderSide: const BorderSide(
                   color: MyColors.colorBlue,
                   width: 1.0,
@@ -113,7 +115,7 @@ class _MyTextInputFieldState extends State<MyTextInputField> {
                   ? InputBorder.none
                   : widget.showBorder
                   ? OutlineInputBorder(
-                borderRadius: BorderRadius.circular(5.0),
+                borderRadius: widget.borderRadius ?? BorderRadius.circular(5.0),
                 borderSide: const BorderSide(
                     color: MyColors.colorBlue, width: 1.0),
               )

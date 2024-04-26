@@ -32,6 +32,6 @@ class MyTextStyle {
 
 
   static var normal = textStyle.copyWith(fontWeight: FontWeight.w400, color: MyColors.blackColor);
-  static var medium = textStyle.copyWith(fontWeight: FontWeight.w500, color: MyColors.blackColor);
+  static var medium = textStyle.copyWith(fontWeight: FontWeight.w600, color: MyColors.blackColor);
   static var bold = textStyle.copyWith(fontWeight: FontWeight.bold, color: MyColors.blackColor);
 }

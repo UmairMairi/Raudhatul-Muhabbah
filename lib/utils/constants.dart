@@ -33,11 +33,35 @@ class Constants {
   static const String targets = "Targets";
   static const String achievement = "Achievement";
 
-  //History screen
+  //Profile screen
   static const String profileTitle = "Profile";
   static const String resetPassword = "Re-Set Password";
 
-  //History screen
+  //Edit Profile Dialog
   static const String editProfile = "Edit Profile";
   static const String submitTitle = "Submit";
+
+  //Home Screen
+  static const String highestAchiever = "Highest Achiever";
+  static const String totalSalutations = "Total Salutations So far : ";
+  static const String setTarget = "Set Target";
+  static const String targetInfo = "How many salutations are you planning to send to our beloved Prophet Muhammad (peace and blessings of Allah be upon him)?";
+  static const String benefits = "Benefits";
+  static const String readMore = "read more...";
+  static const String showLess = "show less";
+
+  //Home Screen
+  static const String aboutTitle = "About";
+  static const String aboutInfo = "Raudhatul Mahabbah is an initiative aimed at enhancing your love for the prophet (P.B.U.H) in your heart by encouraging you to recite more Salawat, especially on Fridays, The proccess works as follows: On Thursday, a member sets a target number of Salawat to be recited on Friday. They begin on Thursday at Maghrib/sunset (the start of Friday) and continue untill Friday Maghrib/sunset (the end of Friday), then submit their achievement. The total number of Salawat and percentage are then displayed. Your percentage is calculated based on the total number of Salawat recited by the highest participant, who is considered as achieving 100%. Other users' percentages are calculated in relation to this benchmark.";
+
+  //Home Screen
+  static const String benefitsTitle = "Daily Benefits";
+  static const String benefitsDetails = "Benefits Details";
+
+  //Home Screen
+  static const String tasbihTitle = "What dhikr are you doing today?";
+  static const String addDhikr = "Add Dhikar";
+  static const String noDhkirAvailbale = "Are you not doing dhikr today???";
+  static const String reset = "Reset";
+  static const String addOne = "+1";
 }

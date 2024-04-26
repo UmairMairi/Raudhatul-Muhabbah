@@ -10,4 +10,8 @@ class Images {
   static const iconAbout = 'assets/images/icon_about.svg';
   static const iconTasbih = 'assets/images/icon_tasbih.svg';
   static const iconLogout = 'assets/images/icon_logout.svg';
+
+  static const iconFacebook = 'assets/images/icon_facebook.svg';
+  static const iconTikTok = 'assets/images/icon_tiktok.svg';
+  static const iconInsta = 'assets/images/icon_insta.svg';
 }

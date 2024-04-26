@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/screens/about_screen.dart';
+import 'package:raudhatul_muhabbah/screens/daily_benefits_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/history_screen.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/home_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/profile_screen.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/drawrer.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/tasbih_screen.dart';
+import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
+import 'package:raudhatul_muhabbah/utils/my_styles.dart';
 import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -17,14 +23,19 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   late List<Widget> list;
   var index = 0;
   @override
   void initState() {
     super.initState();
-    list = [
-      const HistoryScreen(),
-      const ProfileScreen(),
+    list = const [
+      HistoryScreen(),
+      HomeScreen(),
+      ProfileScreen(),
+      AboutScreen(),
+      TasbihScreen(),
+      DailyBenefitsScreen(),
     ];
   }
   @override
@@ -38,19 +49,136 @@ class _DashboardScreenState extends State<DashboardScreen> {
     }
 
     return Scaffold(
+      key:_scaffoldKey,
       extendBodyBehindAppBar: false,
-      drawer: MyDrawer(),
+      drawer: Drawer(
+        backgroundColor: MyColors.colorPrimaryDark,
+        child: Padding(
+          padding: const EdgeInsets.only(left:10.0,right:10.0,bottom:10.0),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Image.asset(Images.appLogo,color: MyColors.whiteColor,height: 150,),
+                  const Divider(color: MyColors.whiteColor,height: 1,),
+                  ListTile(
+                    leading: SvgPicture.asset(Images.iconHomeWhite),
+                    title: Text('Home',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      setState(() {index = 1;});
+                      _scaffoldKey.currentState?.closeDrawer();
+                    },
+                  ),
+                  ListTile(
+                    leading: SvgPicture.asset(Images.iconAbout),
+                    title: Text('About',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      setState(() {index = 3;});
+                      _scaffoldKey.currentState?.closeDrawer();
+                    },
+                  ),
+                  ListTile(
+                    leading: SvgPicture.asset(Images.iconTasbih),
+                    title: Text('Tasbih',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      setState(() {index = 4;});
+                      _scaffoldKey.currentState?.closeDrawer();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.account_circle_outlined,color: Colors.white,),
+                    title: Text('Profile',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      setState(() {index = 2;});
+                      _scaffoldKey.currentState?.closeDrawer();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.history,color: Colors.white,),
+                    title: Text('History',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      setState(() {index = 0;});
+                      _scaffoldKey.currentState?.closeDrawer();
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.history,color: Colors.white,),
+                    title: Text('Daily Benefits',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      setState(() {index = 5;});
+                      _scaffoldKey.currentState?.closeDrawer();
+                      },
+                  ),
+                  const Divider(color: MyColors.whiteColor,height: 1,),
+                  ListTile(
+                    leading: SvgPicture.asset(Images.iconLogout),
+                    title: Text('Logout',style: MyTextStyle.subTitle.copyWith(color: MyColors.whiteColor),),
+                    onTap: () {
+                      Get.offAllNamed(LoginScreen.tag);
+                      _scaffoldKey.currentState?.closeDrawer();
+                    },
+                  ),
+                  const Divider(color: MyColors.whiteColor,height: 1,),
+                ],
+              ),
+              const Spacer(),
+              Row(
+                children: [
+                  InkWell(
+                    splashColor: Colors.grey,
+                    onTap: () {},
+                    child: Container(
+                      height: 50.0,
+                        width: 50.0,
+                        padding: const EdgeInsets.all(10.0),
+                        decoration: BoxDecoration(border: Border.all(color: MyColors.whiteColor,), borderRadius: BorderRadius.circular(5.0)),
+                        child:  SvgPicture.asset(Images.iconFacebook,),),
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    splashColor: Colors.grey,
+                    onTap: () {},
+                    child: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(border: Border.all(color: MyColors.whiteColor,), borderRadius: BorderRadius.circular(5.0)),
+                      child:  SvgPicture.asset(Images.iconTikTok,),),
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    splashColor: Colors.grey,
+                    onTap: () {},
+                    child: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      padding: const EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(border: Border.all(color: MyColors.whiteColor,), borderRadius: BorderRadius.circular(5.0)),
+                      child:  SvgPicture.asset(Images.iconInsta,),),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
       appBar: WidgetFunction.awnAppBar(
         leading: Image.asset(Images.appLogo),
         backgroundColor: Colors.transparent,
         actions: [
-          Container(
-              padding: const EdgeInsets.all(10.0),
-              child: SvgPicture.asset(
-                Images.iconDrawer,
-                height: 30.0,
-                width: 30.0,
-              ))
+          InkWell(
+            onTap: (){
+              _scaffoldKey.currentState?.openDrawer();
+            },
+            child: Container(
+                padding: const EdgeInsets.all(10.0),
+                child: SvgPicture.asset(
+                  Images.iconDrawer,
+                  height: 30.0,
+                  width: 30.0,
+                )),
+          )
         ],
       ),
       backgroundColor: MyColors.backgroundColor,
@@ -95,7 +223,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ),
                 onPressed: () {
                   setState(() {
-                    index = 1;
+                    index = 2;
                   });
                 },
               ),
@@ -112,7 +240,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Padding(
           padding: const EdgeInsets.all(5.0),
           child: FloatingActionButton(
-            onPressed: () async {},
+            onPressed: () async {
+              setState(() {
+                index = 1;
+              });
+            },
             isExtended: true,
             shape: const CircleBorder(),
             backgroundColor: MyColors.whiteColor,
