@@ -19,6 +19,17 @@ class MyColors {
   static const Color colorBlue = Color(0xFF3B82F6);
   static const Color colorBlueAccent = Color(0xFFBFDBFE);
 
+  static const Color snackbarSuccessBackground = Color(0xFFEFFFD8);
+  static const Color snackbarSuccessBorder = Color(0xFF2A6000);
+  static const Color lightPinkColor = Color(0xFFFFB9B1);
+  static const Color peachColor = Color(0xFFFBDEDB);
+  static const Color orangeRedColor = Color(0xFFEC5C4D);
+
+  static const Color shimmerBaseColor =  Color(0xFFEAEAEA);
+  static const Color shimmerBaseColor2 =  Color(0xFFD4D4D4);
+  static const Color shimmerHighlightColor =  Color(0xFFF5F5F5);
+
+
   static const Gradient blackGradiant = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,

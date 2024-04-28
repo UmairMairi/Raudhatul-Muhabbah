@@ -11,7 +11,7 @@ class MyTextInputField extends StatefulWidget {
   final TextInputType keyboardType;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
-  final String? Function(String?)? onChange;
+  final Function(String?)? onChange;
   final bool? isEnabled;
   final bool showBorder;
   final bool? expand;

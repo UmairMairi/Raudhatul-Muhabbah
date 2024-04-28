@@ -8,6 +8,7 @@ class Constants {
   static const String emailPlaceholder = "example@example.com";
   static const String passwordPlaceholder = "Your Password";
   static const String buttonTitle = "Login";
+  static const String buttonTitle2 = "Authenticating";
   static const String notAccountInfo = "Don't Have an Account!! Sign up";
 
   //Login Screen
@@ -64,4 +65,9 @@ class Constants {
   static const String noDhkirAvailbale = "Are you not doing dhikr today???";
   static const String reset = "Reset";
   static const String addOne = "+1";
+
+  static const String somethingWrong = "Something went wrong.";
+  static const String validEmail = "Please Enter a valid email.";
+  static const String validPassword = "Please Enter a valid email.";
+  static const String passwordRange = "Password must be 6 characters.";
 }

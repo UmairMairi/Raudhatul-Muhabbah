@@ -1,10 +1,12 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/login_screen.dart';
+import 'package:raudhatul_muhabbah/utils/PrefUtils.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
+import 'package:raudhatul_muhabbah/utils/singlton.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero,()async{
-      Get.offNamed(LoginScreen.tag);
+      var token = await MyPrefUtils.getString(MyPrefUtils.tokenKey);
+      if(token.isNotEmpty){
+        Singleton.token = token;
+        Get.offNamed(DashboardScreen.tag);
+      }else{
+        Get.offNamed(LoginScreen.tag);
+      }
     });
   }
   @override

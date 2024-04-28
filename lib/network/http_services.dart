@@ -37,7 +37,7 @@ class HttpServices {
     };
 
     if (token != null) {
-      headers["Authorization"] = 'Bearer $token';
+      headers["Authorization"] = 'Token $token';
     }
 
     if (kDebugMode) {
@@ -77,8 +77,9 @@ class HttpServices {
       headers["Authorization"] = 'Bearer $token';
     }
     if (kDebugMode) {
-      print(
-          "Url------------------------>$url\nRequest headers------------------------>$headers\nBody------------------------>$body");
+      print("Url------------------------>$url");
+      print("Request headers------------------------>$headers");
+      print("Body------------------------>$body");
     }
     if (queryParams != null) {
       final uri = Uri.parse(url).replace(queryParameters: queryParams);

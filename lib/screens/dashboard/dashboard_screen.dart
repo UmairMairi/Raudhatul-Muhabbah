@@ -3,6 +3,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
 import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
 import 'package:raudhatul_muhabbah/screens/about_screen.dart';
 import 'package:raudhatul_muhabbah/screens/daily_benefits_screen.dart';
@@ -31,6 +32,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late List<TabItem> _tabs;
   var index = 0;
   late CircularBottomNavigationController _navigationController;
+  var controller = Get.put(DashboardController());
 
   @override
   void initState() {
