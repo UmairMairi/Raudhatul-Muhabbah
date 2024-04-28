@@ -23,6 +23,8 @@ class MyTextInputField extends StatefulWidget {
   final Function? onTap;
   final TextCapitalization textCapitalization;
   final BorderRadius? borderRadius;
+  final Widget? suffix;
+  final bool? readOnly;
 
   const MyTextInputField(
       {Key? key,
@@ -42,6 +44,8 @@ class MyTextInputField extends StatefulWidget {
         this.hintText,
         this.onTap,
         this.borderRadius,
+        this.suffix,
+        this.readOnly,
         this.textCapitalization = TextCapitalization.none,
         this.hintStyle})
       : super(key: key);
@@ -92,9 +96,11 @@ class _MyTextInputFieldState extends State<MyTextInputField> {
           validator: widget.validator,
           enabled: widget.isEnabled,
           maxLines: widget.isObscure ? 1 : widget.lines,
+          readOnly: widget.readOnly ?? false,
           scrollPadding: EdgeInsets.zero,
           decoration: InputDecoration(
               hintText: widget.hintText,
+              suffix: widget.suffix,
               hintStyle: widget.hintStyle ?? MyTextStyle.textFieldHintTextStyle,
               contentPadding:
               const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),

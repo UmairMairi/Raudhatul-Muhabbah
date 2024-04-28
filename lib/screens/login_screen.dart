@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
@@ -57,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 title:  Constants.titlePassword,
                 isLabelRequired: true,
                 hintText: Constants.passwordPlaceholder,
+                isObscure: true,
               ),
               const SizedBox(
                 height: 40.0,
@@ -66,6 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: MyColors.colorBlue,
                 borderColor: Colors.transparent,
                 titleStyle:  MyTextStyle.buttonTitle.copyWith(color: MyColors.whiteColor),
+                onPressed: (){
+                  Get.toNamed(DashboardScreen.tag);
+                },
               ),
               const SizedBox(
                 height: 10.0,

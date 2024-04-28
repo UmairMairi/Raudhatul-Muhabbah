@@ -1,6 +1,8 @@
+
+
 class Singleton {
   static final Singleton _singleton = Singleton._internal();
-  static const bool isDev = false;
+  static String? token;
 
   factory Singleton() {
     return _singleton;

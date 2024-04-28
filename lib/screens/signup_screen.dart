@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/extentions/context_extentions.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
@@ -21,6 +22,7 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
+    var controller = TextEditingController(text: "Male");
     var size = MediaQuery.of(context).size;
     var width = size.width;
     var height = size.height;
@@ -40,13 +42,18 @@ class _SignupScreenState extends State<SignupScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 20.0,),
-              Image.asset(Images.appLogo,height: 200,width: 200,),
+              const SizedBox(
+                height: 20.0,
+              ),
+              Image.asset(
+                Images.appLogo,
+                height: 200,
+                width: 200,
+              ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:20.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Text(Constants.signupInfo,
-                  textAlign: TextAlign.center,
-                  style: MyTextStyle.infoStyle),
+                    textAlign: TextAlign.center, style: MyTextStyle.infoStyle),
               ),
               const SizedBox(
                 height: 20.0,
@@ -60,7 +67,9 @@ class _SignupScreenState extends State<SignupScreen> {
                       keyboardType: TextInputType.text,
                     ),
                   ),
-                  SizedBox(width: 10.0,),
+                  SizedBox(
+                    width: 10.0,
+                  ),
                   Expanded(
                     child: MyTextInputField(
                       title: Constants.titleLastName,
@@ -77,15 +86,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   Expanded(
                     child: MyTextInputField(
-                      title:  Constants.titleSignupEmail,
+                      title: Constants.titleSignupEmail,
                       isLabelRequired: true,
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
-                  SizedBox(width: 10.0,),
+                  SizedBox(
+                    width: 10.0,
+                  ),
                   Expanded(
                     child: MyTextInputField(
-                      title:  Constants.titleAddress,
+                      title: Constants.titleAddress,
                       isLabelRequired: true,
                       keyboardType: TextInputType.streetAddress,
                     ),
@@ -99,15 +110,17 @@ class _SignupScreenState extends State<SignupScreen> {
                 children: [
                   Expanded(
                     child: MyTextInputField(
-                      title:  Constants.titlePhone,
+                      title: Constants.titlePhone,
                       isLabelRequired: true,
                       keyboardType: TextInputType.phone,
                     ),
                   ),
-                  SizedBox(width: 10.0,),
+                  SizedBox(
+                    width: 10.0,
+                  ),
                   Expanded(
                     child: MyTextInputField(
-                      title:  Constants.titleSignupPassword,
+                      title: Constants.titleSignupPassword,
                       isObscure: true,
                       isLabelRequired: true,
                       keyboardType: TextInputType.visiblePassword,
@@ -118,10 +131,61 @@ class _SignupScreenState extends State<SignupScreen> {
               const SizedBox(
                 height: 20.0,
               ),
-              const MyTextInputField(
-                title:  Constants.titleGender,
+              MyTextInputField(
+                title: Constants.titleGender,
+                controller: controller,
                 isLabelRequired: true,
                 keyboardType: TextInputType.text,
+                readOnly: true,
+                suffix: InkWell(
+                  onTap: () {
+                    FocusScope.of(context).unfocus();
+                    context.showBottomSheet(child: Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 20.0),
+                              child: Text(
+                                "Select Gender",
+                                style: MyTextStyle.title,
+                              )),
+                          const Divider(),
+                          ListTile(
+                            title: Text(
+                              "Male",
+                              style: MyTextStyle.textFieldTextStyle,
+                            ),
+                            onTap: () {
+                              Get.back(result: "Male");
+                            },
+                          ),
+                          const Divider(),
+                          ListTile(
+                            title: Text(
+                              "Female",
+                              style: MyTextStyle.textFieldTextStyle,
+                            ),
+                            onTap: () {
+                              Get.back(result: "Female");
+                            },
+                          ),
+                          const Divider(),
+                        ],
+                      ),
+                    )).then((value){
+                      if(value != null){
+                          controller.text = value;
+                      }
+                    });
+                  },
+                  child: Container(
+                      padding: const EdgeInsets.all(5.0),
+                      child: const Icon(Icons.keyboard_arrow_down_outlined)),
+                ),
               ),
               const SizedBox(
                 height: 40.0,
@@ -130,8 +194,8 @@ class _SignupScreenState extends State<SignupScreen> {
                 title: Constants.btnSubmitTitle,
                 backgroundColor: MyColors.colorBlue,
                 borderColor: Colors.transparent,
-                titleStyle:  MyTextStyle.buttonTitle.copyWith(color: MyColors.whiteColor),
-                onPressed: (){
+                titleStyle: MyTextStyle.buttonTitle.copyWith(color: MyColors.whiteColor),
+                onPressed: () {
                   Get.offNamed(DashboardScreen.tag);
                 },
               ),
@@ -142,8 +206,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     title: Constants.alreadyAccountInfo,
                     backgroundColor: Colors.transparent,
                     borderColor: Colors.transparent,
-                    titleStyle: MyTextStyle.buttonTitle.copyWith(fontWeight: FontWeight.normal,color: MyColors.colorBlue),
-                    onPressed: (){
+                    titleStyle: MyTextStyle.buttonTitle.copyWith(
+                        fontWeight: FontWeight.normal,
+                        color: MyColors.colorBlue),
+                    onPressed: () {
                       Get.toNamed(LoginScreen.tag);
                     },
                   ),
