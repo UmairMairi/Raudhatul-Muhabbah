@@ -12,6 +12,7 @@ import 'package:raudhatul_muhabbah/screens/dashboard/home_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/profile_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/tasbih_screen.dart';
 import 'package:raudhatul_muhabbah/screens/login_screen.dart';
+import 'package:raudhatul_muhabbah/utils/PrefUtils.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
@@ -30,20 +31,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   late List<Widget> list;
   late List<TabItem> _tabs;
-  var index = 2;
+  var index = 1;
   late CircularBottomNavigationController _navigationController;
   var controller = Get.put(DashboardController());
 
   @override
   void initState() {
     super.initState();
-    list = const [
-      HistoryScreen(),
-      HomeScreen(),
-      ProfileScreen(),
-      AboutScreen(),
-      TasbihScreen(),
-      DailyBenefitsScreen(),
+    list = [
+      const HistoryScreen(),
+      const HomeScreen(),
+      ProfileScreen(currentIndex: (val)=> index = val),
+      const AboutScreen(),
+      const TasbihScreen(),
+      const DailyBenefitsScreen(),
     ];
     _tabs = List.of([
       TabItem(Icons.history, "History", MyColors.whiteColor,labelStyle: MyTextStyle.text.copyWith(color: MyColors.whiteColor),),
@@ -190,7 +191,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             .copyWith(color: MyColors.whiteColor),
                       ),
                       onTap: () {
-                        Get.offAllNamed(LoginScreen.tag);
+                        MyPrefUtils.clearCaches().then((value)=> Get.offAllNamed(LoginScreen.tag));
                         _scaffoldKey.currentState?.closeDrawer();
                       },
                     ),

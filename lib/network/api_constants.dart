@@ -5,7 +5,9 @@ class ApiConstants {
 
   static const String register = "${BASE_URL}base/system_user_registeration/";
   static const String login = "${BASE_URL}auth/token/";
-  static const String getProfileDetails = "${BASE_URL}base/my";
+  // static const String getProfileDetails = "${BASE_URL}base/my";
+  static const String getProfileDetails = "${BASE_URL}base/system_user_registeration/";
+  static const String updateProfile = "${BASE_URL}base/system_user_registeration/";
   static const String getBenefits = "${BASE_URL}swala/benefits/";
   static const String toggleTargets = "${BASE_URL}swala/toggleTarget/";
   static const String toggleAchievement = "${BASE_URL}swala/toggleAchievement/";

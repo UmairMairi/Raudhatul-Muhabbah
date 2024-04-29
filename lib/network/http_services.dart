@@ -115,13 +115,15 @@ class HttpServices {
     };
 
     if (token != null) {
-      headers["Authorization"] = 'Bearer $token';
+      headers["Authorization"] = 'Token $token';
     }
 
     if (kDebugMode) {
-      print(
-          "Url------------------------>$url\nRequest headers------------------------>$headers\nBody------------------------>$body");
+      print("Url------------------------>$url");
+      print("Request headers------------------------>$headers");
+      print("Body------------------------>$body");
     }
+
     if (queryParams != null) {
       final uri = Uri.parse(url).replace(queryParameters: queryParams);
       url = uri.toString();
@@ -154,7 +156,13 @@ class HttpServices {
     };
 
     if (token != null) {
-      headers["Authorization"] = 'Bearer $token';
+      headers["Authorization"] = 'Token $token';
+    }
+
+    if (kDebugMode) {
+      print("Url------------------------>$url");
+      print("Request headers------------------------>$headers");
+      print("Body------------------------>$body");
     }
 
     var request = http.Request("PUT", Uri.parse(url));

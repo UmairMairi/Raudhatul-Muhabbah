@@ -71,6 +71,7 @@ class Constants {
   static const String addOne = "+1";
 
   static const String resetSuccess = "Password reset successfully";
+  static const String profileUpdateSuccess = "Profile Update successfully";
 
   static const String somethingWrong = "Something went wrong.";
   static const String validEmail = "Please Enter a valid email.";

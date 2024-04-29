@@ -27,8 +27,7 @@ class LoginController extends AuthController {
         var model = loginModelFromJson(response.body);
         return model;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}"
-            .showSnackbar();
+        "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       isLoginLoading.value = false;
       return null;

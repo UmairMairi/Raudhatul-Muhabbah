@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/cotrollers/auth_controller.dart';
 import 'package:raudhatul_muhabbah/cotrollers/login_controller.dart';
 import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
+import 'package:raudhatul_muhabbah/models/login_model.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
@@ -141,13 +142,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ))
                       : null,
                   onPressed: () {
-                    controller.login(
-                      email: emailController.text,
-                      password: passwordController.text,
-                    ).then((value) {
+                    controller.login(email: emailController.text, password: passwordController.text,).then((value) {
                       if (value?.key != null) {
-                        MyPrefUtils.putString(MyPrefUtils.tokenKey, value!.key!);
+                        MyPrefUtils.putString(MyPrefUtils.loginModel, loginModelToJson(value!));
                         Singleton.token = value.key;
+                        Singleton.loginModel = value;
                         Get.toNamed(DashboardScreen.tag);
                       }
                     });

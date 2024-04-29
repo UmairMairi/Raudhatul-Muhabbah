@@ -1,10 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/cotrollers/auth_controller.dart';
 import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
 import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
-import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
@@ -12,10 +10,13 @@ import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
 import 'package:raudhatul_muhabbah/utils/shimmer.dart';
+import 'package:raudhatul_muhabbah/utils/singlton.dart';
 import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  final ValueChanged<int>? currentIndex;
+
+  const ProfileScreen({super.key, this.currentIndex});
 
   static const String tag = "/profile_screen";
 
@@ -29,10 +30,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var oldPasswordController = TextEditingController();
   var newPasswordController = TextEditingController();
 
+  var firstNameController = TextEditingController();
+  var lastNameController = TextEditingController();
+  var emailController = TextEditingController();
+  var phoneController = TextEditingController();
+  var addressController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    controller.getProfileDetails();
+    controller
+        .getProfileDetails(id: "${Singleton.loginModel?.userId}")
+        .then((value) {
+      firstNameController.text = value?.firstName ?? "";
+      lastNameController.text = value?.lastName ?? "";
+      emailController.text = value?.email ?? "";
+      phoneController.text = value?.profile?.phoneNo ?? "";
+      addressController.text = value?.profile?.pAddress ?? "";
+    });
   }
 
   @override
@@ -78,7 +93,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const Spacer(),
                         InkWell(
                           splashColor: Colors.grey,
-                          onTap: () {},
+                          onTap: () {
+                            if (widget.currentIndex != null) {
+                              widget.currentIndex!(0);
+                            }
+                          },
                           child: Container(
                               padding: const EdgeInsets.all(5.0),
                               decoration: BoxDecoration(
@@ -169,16 +188,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     const SizedBox(
                                       height: 20.0,
                                     ),
-                                    const Row(
+                                    Row(
                                       children: [
                                         Expanded(
                                           child: MyTextInputField(
                                             title: Constants.titleFirstName,
                                             isLabelRequired: true,
                                             keyboardType: TextInputType.text,
+                                            controller: firstNameController,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10.0,
                                         ),
                                         Expanded(
@@ -186,6 +206,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             title: Constants.titleLastName,
                                             isLabelRequired: true,
                                             keyboardType: TextInputType.text,
+                                            controller: lastNameController,
                                           ),
                                         ),
                                       ],
@@ -193,7 +214,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     const SizedBox(
                                       height: 10.0,
                                     ),
-                                    const Row(
+                                    Row(
                                       children: [
                                         Expanded(
                                           child: MyTextInputField(
@@ -201,9 +222,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             isLabelRequired: true,
                                             keyboardType:
                                                 TextInputType.emailAddress,
+                                            controller: emailController,
                                           ),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 10.0,
                                         ),
                                         Expanded(
@@ -211,6 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             title: Constants.titlePhone,
                                             isLabelRequired: true,
                                             keyboardType: TextInputType.phone,
+                                            controller: phoneController,
                                           ),
                                         ),
                                       ],
@@ -218,23 +241,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     const SizedBox(
                                       height: 10.0,
                                     ),
-                                    const MyTextInputField(
+                                    MyTextInputField(
                                       title: Constants.titleAddress,
                                       isLabelRequired: true,
                                       keyboardType: TextInputType.streetAddress,
+                                      controller: addressController,
                                     ),
                                     const SizedBox(
                                       height: 20.0,
                                     ),
                                     PrimaryButton(
-                                        title: Constants.submitTitle,
-                                        backgroundColor: MyColors.colorPrimary,
-                                        borderColor: Colors.transparent,
-                                        titleStyle: MyTextStyle.buttonTitle
-                                            .copyWith(
-                                                color: MyColors.whiteColor),
-                                        borderRadius:
-                                            BorderRadius.circular(50.0))
+                                      title: Constants.submitTitle,
+                                      backgroundColor: MyColors.colorPrimary,
+                                      borderColor: Colors.transparent,
+                                      titleStyle: MyTextStyle.buttonTitle
+                                          .copyWith(color: MyColors.whiteColor),
+                                      borderRadius: BorderRadius.circular(50.0),
+                                      onPressed: () {
+                                        controller.updateProfile(
+                                            id: "${Singleton.loginModel?.userId}",
+                                            fName: firstNameController.text,
+                                            lastName: lastNameController.text,
+                                            email: emailController.text,
+                                            phone: phoneController.text,
+                                            address: addressController.text).then((value){
+                                          Constants.profileUpdateSuccess.tr.showSnackbar(isSuccess: true);
+                                        });
+                                      },
+                                    )
                                   ],
                                 ));
                               },
@@ -268,7 +302,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           color: Colors.white,
                                           backgroundColor: Colors.black)),
                                 )
-                              : Text(controller.profileModel.value?.names ?? "",
+                              : Text(
+                                  "${controller.profileModel.value?.firstName ?? ""} ${controller.profileModel.value?.lastName ?? ""}",
                                   style: MyTextStyle.subTitle.copyWith(
                                       color: Colors.white,
                                       backgroundColor: Colors.black));
@@ -387,8 +422,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               .copyWith(color: MyColors.whiteColor),
                           borderRadius: BorderRadius.circular(50.0),
                           onPressed: () {
-                            authController.resetPassword(oldPassword: oldPasswordController.text, newPassword: newPasswordController.text).then((value){
-                              if(value == true){
+                            authController
+                                .resetPassword(
+                                    oldPassword: oldPasswordController.text,
+                                    newPassword: newPasswordController.text)
+                                .then((value) {
+                              if (value == true) {
                                 Constants.resetSuccess.tr.showSnackbar(isSuccess: true);
                               }
                             });

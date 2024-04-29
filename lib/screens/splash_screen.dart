@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/models/login_model.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/utils/PrefUtils.dart';
@@ -22,9 +23,11 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration.zero,()async{
-      var token = await MyPrefUtils.getString(MyPrefUtils.tokenKey);
-      if(token.isNotEmpty){
-        Singleton.token = token;
+      var model = await MyPrefUtils.getString(MyPrefUtils.loginModel);
+      if(model.isNotEmpty){
+        var loginModel = loginModelFromJson(model);
+        Singleton.token = loginModel.key;
+        Singleton.loginModel = loginModel;
         Get.offNamed(DashboardScreen.tag);
       }else{
         Get.offNamed(LoginScreen.tag);

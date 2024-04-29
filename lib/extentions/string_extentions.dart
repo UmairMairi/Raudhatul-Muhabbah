@@ -161,4 +161,16 @@ extension NullableStringExtention on String? {
       margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
     );
   }
+
+
+  String? shortenText({String overflowText = "", int maxLength = 100}) {
+    if(this == null) return null;
+    if (this!.length <= maxLength) {
+      return this;
+    } else {
+      var shortenedText = this?.substring(0, maxLength);
+      return '$shortenedText$overflowText';
+    }
+  }
+
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
 import 'package:raudhatul_muhabbah/routes/rutes.dart';
 import 'package:raudhatul_muhabbah/screens/splash_screen.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    Get.put(DashboardController());
     return GetMaterialApp(
       title: Constants.appName,
       theme: ThemeData(

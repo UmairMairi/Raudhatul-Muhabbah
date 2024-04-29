@@ -10,41 +10,88 @@ String profileDetailsToJson(ProfileDetails data) => json.encode(data.toJson());
 
 class ProfileDetails {
   final int? id;
-  final String? names;
+  final String? firstName;
+  final String? lastName;
   final String? email;
-  final List<String>? roles;
+  final Profile? profile;
 
   ProfileDetails({
     this.id,
-    this.names,
+    this.firstName,
+    this.lastName,
     this.email,
-    this.roles,
+    this.profile,
   });
 
   ProfileDetails copyWith({
     int? id,
-    String? names,
+    String? firstName,
+    String? lastName,
     String? email,
-    List<String>? roles,
+    Profile? profile,
   }) =>
       ProfileDetails(
         id: id ?? this.id,
-        names: names ?? this.names,
+        firstName: firstName ?? this.firstName,
+        lastName: lastName ?? this.lastName,
         email: email ?? this.email,
-        roles: roles ?? this.roles,
+        profile: profile ?? this.profile,
       );
 
   factory ProfileDetails.fromJson(Map<String, dynamic> json) => ProfileDetails(
     id: json["id"],
-    names: json["names"],
+    firstName: json["first_name"],
+    lastName: json["last_name"],
     email: json["email"],
-    roles: json["roles"] == null ? [] : List<String>.from(json["roles"]!.map((x) => x)),
+    profile: json["profile"] == null ? null : Profile.fromJson(json["profile"]),
   );
 
   Map<String, dynamic> toJson() => {
     "id": id,
-    "names": names,
+    "first_name": firstName,
+    "last_name": lastName,
     "email": email,
-    "roles": roles == null ? [] : List<dynamic>.from(roles!.map((x) => x)),
+    "profile": profile?.toJson(),
+  };
+}
+
+class Profile {
+  final String? phoneNo;
+  final String? pAddress;
+  final DateTime? createdOn;
+  final String? gender;
+
+  Profile({
+    this.phoneNo,
+    this.pAddress,
+    this.createdOn,
+    this.gender,
+  });
+
+  Profile copyWith({
+    String? phoneNo,
+    String? pAddress,
+    DateTime? createdOn,
+    String? gender,
+  }) =>
+      Profile(
+        phoneNo: phoneNo ?? this.phoneNo,
+        pAddress: pAddress ?? this.pAddress,
+        createdOn: createdOn ?? this.createdOn,
+        gender: gender ?? this.gender,
+      );
+
+  factory Profile.fromJson(Map<String, dynamic> json) => Profile(
+    phoneNo: json["phone_no"],
+    pAddress: json["p_address"],
+    createdOn: json["created_on"] == null ? null : DateTime.parse(json["created_on"]),
+    gender: json["gender"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "phone_no": phoneNo,
+    "p_address": pAddress,
+    "created_on": createdOn?.toIso8601String(),
+    "gender": gender,
   };
 }
