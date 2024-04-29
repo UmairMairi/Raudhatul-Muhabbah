@@ -37,6 +37,10 @@ class Constants {
   //Profile screen
   static const String profileTitle = "Profile";
   static const String resetPassword = "Re-Set Password";
+  static const String oldPassword = "Old Password";
+  static const String newPassword = "New Password";
+  static const String changePassword = "Change Password";
+
 
   //Edit Profile Dialog
   static const String editProfile = "Edit Profile";
@@ -65,6 +69,8 @@ class Constants {
   static const String noDhkirAvailbale = "Are you not doing dhikr today???";
   static const String reset = "Reset";
   static const String addOne = "+1";
+
+  static const String resetSuccess = "Password reset successfully";
 
   static const String somethingWrong = "Something went wrong.";
   static const String validEmail = "Please Enter a valid email.";

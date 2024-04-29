@@ -13,18 +13,24 @@ import 'package:raudhatul_muhabbah/utils/singlton.dart';
 
 class DashboardController extends BaseController {
 
+  RxBool isProfileLoading = false.obs;
+  var profileModel = Rxn<ProfileDetails?>();
 
   Future<ProfileDetails?> getProfileDetails() async {
+    isProfileLoading.value = true;
+    profileModel.value = null;
     try {
       var response = await HttpServices.getJson(url: ApiConstants.getProfileDetails,token: Singleton.token);
       if (response.isSuccessful()) {
-        return profileDetailsFromJson(response.body);
+        profileModel.value =  profileDetailsFromJson(response.body);
       } else {
         "${response.body.toJson()?.getValueOfKey("message") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
-      return null;
+      isProfileLoading.value = false;
+      return profileModel.value;
     } catch (e) {
       'msg_something_went_wrong'.tr.showSnackbar();
+      isProfileLoading.value = false;
       return null;
     }
   }

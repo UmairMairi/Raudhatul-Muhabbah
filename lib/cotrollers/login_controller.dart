@@ -27,14 +27,14 @@ class LoginController extends AuthController {
         var model = loginModelFromJson(response.body);
         return model;
       } else {
-        "${response.body.toJson()?.getValueOfKey("message") ?? Constants.somethingWrong.tr}"
+        "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}"
             .showSnackbar();
       }
       isLoginLoading.value = false;
       return null;
     } catch (e) {
       isLoginLoading.value = false;
-      'msg_something_went_wrong'.tr.showSnackbar();
+      Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }

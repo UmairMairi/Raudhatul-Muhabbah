@@ -30,7 +30,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   late List<Widget> list;
   late List<TabItem> _tabs;
-  var index = 0;
+  var index = 2;
   late CircularBottomNavigationController _navigationController;
   var controller = Get.put(DashboardController());
 

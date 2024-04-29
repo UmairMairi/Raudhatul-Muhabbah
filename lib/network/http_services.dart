@@ -74,7 +74,7 @@ class HttpServices {
     };
 
     if (token != null) {
-      headers["Authorization"] = 'Bearer $token';
+      headers["Authorization"] = 'Token $token';
     }
     if (kDebugMode) {
       print("Url------------------------>$url");
