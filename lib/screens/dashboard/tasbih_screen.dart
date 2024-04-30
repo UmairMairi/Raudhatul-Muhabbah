@@ -1,16 +1,10 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
-import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
-import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
 class TasbihScreen extends StatefulWidget {
   const TasbihScreen({super.key});
