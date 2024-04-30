@@ -33,7 +33,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late List<TabItem> _tabs;
   var index = 1;
   late CircularBottomNavigationController _navigationController;
-  var controller = Get.put(DashboardController());
+  var controller = Get.find<DashboardController>();
 
   @override
   void initState() {
@@ -41,7 +41,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
     list = [
       const HistoryScreen(),
       const HomeScreen(),
-      ProfileScreen(currentIndex: (val)=> index = val),
+      ProfileScreen(currentIndex: (val) {
+        index = val;
+        _navigationController.value = val;
+      }),
       const AboutScreen(),
       const TasbihScreen(),
       const DailyBenefitsScreen(),

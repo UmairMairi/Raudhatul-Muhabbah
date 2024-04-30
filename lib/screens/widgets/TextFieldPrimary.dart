@@ -25,6 +25,7 @@ class MyTextInputField extends StatefulWidget {
   final BorderRadius? borderRadius;
   final Widget? suffix;
   final bool? readOnly;
+  final double? textHeight;
 
   const MyTextInputField(
       {Key? key,
@@ -46,6 +47,7 @@ class MyTextInputField extends StatefulWidget {
         this.borderRadius,
         this.suffix,
         this.readOnly,
+        this.textHeight,
         this.textCapitalization = TextCapitalization.none,
         this.hintStyle})
       : super(key: key);

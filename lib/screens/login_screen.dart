@@ -25,7 +25,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  var controller = Get.put(LoginController());
+  var controller = Get.find<LoginController>();
   var emailController = TextEditingController();
   var passwordController = TextEditingController();
 
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return Constants.validEmail;
                       }
                     default:
-                      if (value.isValidEmail()) {
+                      if (!value.isValidEmail()) {
                         return Constants.validEmail;
                       } else {
                         return null;
@@ -106,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         return Constants.validPassword;
                       }
                     default:
-                      if (value.length < 6) {
+                      if (value.length < 8) {
                         return Constants.passwordRange;
                       } else {
                         return null;

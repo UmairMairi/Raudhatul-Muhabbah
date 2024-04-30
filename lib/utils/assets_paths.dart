@@ -14,4 +14,5 @@ class Images {
   static const iconFacebook = 'assets/images/icon_facebook.svg';
   static const iconTikTok = 'assets/images/icon_tiktok.svg';
   static const iconInsta = 'assets/images/icon_insta.svg';
+  static const iconAchievement = 'assets/images/icon_achievement.svg';
 }

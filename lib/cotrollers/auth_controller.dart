@@ -9,24 +9,26 @@ import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/singlton.dart';
 
 class AuthController extends BaseController {
+
+  RxBool isResetPasswordLoading = false.obs;
   Future resetPassword(
       {required String oldPassword, required String newPassword}) async {
     try {
-      isLoading.value = true;
+      isResetPasswordLoading.value = true;
       var body = {"oldPass": oldPassword, "newPass": newPassword};
       var response = await HttpServices.postJson(
           url: ApiConstants.resetPassword, body: body,token: Singleton.token);
       if (response.isSuccessful()) {
-        isLoading.value = false;
+        isResetPasswordLoading.value = false;
         Get.back();
         return true;
       } else {
         "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
-      isLoading.value = false;
+      isResetPasswordLoading.value = false;
       return null;
     } catch (e) {
-      isLoading.value = false;
+      isResetPasswordLoading.value = false;
       Constants.somethingWrong.tr.showSnackbar();
       return null;
     }

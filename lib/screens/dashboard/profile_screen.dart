@@ -26,7 +26,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   var controller = Get.find<DashboardController>();
-  var authController = Get.put(AuthController());
+  var authController = Get.find<AuthController>();
   var oldPasswordController = TextEditingController();
   var newPasswordController = TextEditingController();
 
@@ -146,13 +146,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                             ),
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(50.0),
-                              child: const FadeInImage(
-                                height: 100,
-                                placeholder: AssetImage(Images.placeholderMan),
-                                image: AssetImage(Images.placeholderMan),
-                              ),
+                            Obx(() {
+                                return ClipRRect(
+                                  borderRadius: BorderRadius.circular(50.0),
+                                  child: FadeInImage(
+                                    height: 100,
+                                    placeholder: AssetImage((controller.profileModel.value?.profile?.gender?.toLowerCase() == "female") ?Images.placeholderWoman:Images.placeholderMan),
+                                    image: AssetImage((controller.profileModel.value?.profile?.gender?.toLowerCase() == "female") ?Images.placeholderWoman:Images.placeholderMan),
+                                  ),
+                                );
+                              }
                             ),
                             InkWell(
                               onTap: () {
@@ -250,24 +253,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     const SizedBox(
                                       height: 20.0,
                                     ),
-                                    PrimaryButton(
-                                      title: Constants.submitTitle,
-                                      backgroundColor: MyColors.colorPrimary,
-                                      borderColor: Colors.transparent,
-                                      titleStyle: MyTextStyle.buttonTitle
-                                          .copyWith(color: MyColors.whiteColor),
-                                      borderRadius: BorderRadius.circular(50.0),
-                                      onPressed: () {
-                                        controller.updateProfile(
-                                            id: "${Singleton.loginModel?.userId}",
-                                            fName: firstNameController.text,
-                                            lastName: lastNameController.text,
-                                            email: emailController.text,
-                                            phone: phoneController.text,
-                                            address: addressController.text).then((value){
-                                          Constants.profileUpdateSuccess.tr.showSnackbar(isSuccess: true);
-                                        });
-                                      },
+                                    Obx(() {
+                                        return (controller.isUpdateProfileLoading.value)
+                                            ?PrimaryButton(
+                                          title: Constants.updatingProfile,
+                                          backgroundColor:
+                                          MyColors.colorPrimary.withOpacity(0.8),
+                                          borderColor: Colors.transparent,
+                                          titleStyle: MyTextStyle.buttonTitle.copyWith(color: MyColors.whiteColor),
+                                          borderRadius: BorderRadius.circular(50.0),
+                                          leadingChild: Container(
+                                            height: 20.0,
+                                            width: 20.0,
+                                            margin: const EdgeInsets.only(right: 10.0),
+                                            child: const CircularProgressIndicator(strokeWidth: 2, color: MyColors.whiteColor,),
+                                          ),
+                                        )
+                                            :PrimaryButton(
+                                          title: Constants.submitTitle,
+                                          backgroundColor: MyColors.colorPrimary,
+                                          borderColor: Colors.transparent,
+                                          titleStyle: MyTextStyle.buttonTitle
+                                              .copyWith(color: MyColors.whiteColor),
+                                          borderRadius: BorderRadius.circular(50.0),
+                                          onPressed: () {
+                                            controller.updateProfile(
+                                                id: "${Singleton.loginModel?.userId}",
+                                                fName: firstNameController.text,
+                                                lastName: lastNameController.text,
+                                                email: emailController.text,
+                                                phone: phoneController.text,
+                                                address: addressController.text).then((value){
+                                                  Constants.profileUpdateSuccess.tr.showSnackbar(isSuccess: true);
+                                            });
+                                          },
+                                        );
+                                      }
                                     )
                                   ],
                                 ));
@@ -403,7 +424,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   return Constants.validPassword;
                                 }
                               default:
-                                if (value.length < 6) {
+                                if (value.length < 8) {
                                   return Constants.passwordRange;
                                 } else {
                                   return null;
@@ -414,24 +435,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         const SizedBox(
                           height: 20.0,
                         ),
-                        PrimaryButton(
-                          title: Constants.submitTitle,
-                          backgroundColor: MyColors.colorPrimary,
-                          borderColor: Colors.transparent,
-                          titleStyle: MyTextStyle.buttonTitle
-                              .copyWith(color: MyColors.whiteColor),
-                          borderRadius: BorderRadius.circular(50.0),
-                          onPressed: () {
-                            authController
-                                .resetPassword(
-                                    oldPassword: oldPasswordController.text,
-                                    newPassword: newPasswordController.text)
-                                .then((value) {
-                              if (value == true) {
-                                Constants.resetSuccess.tr.showSnackbar(isSuccess: true);
-                              }
-                            });
-                          },
+                        Obx(() {
+                            return (authController.isResetPasswordLoading.value)
+                                ? PrimaryButton(
+                              title: Constants
+                                  .resettingPassword,
+                              backgroundColor:
+                              MyColors
+                                  .colorPrimary
+                                  .withOpacity(
+                                  0.8),
+                              borderColor: Colors
+                                  .transparent,
+                              titleStyle: MyTextStyle
+                                  .buttonTitle
+                                  .copyWith(
+                                  color: MyColors
+                                      .whiteColor),
+                              borderRadius:
+                              BorderRadius
+                                  .circular(
+                                  50.0),
+                              leadingChild:
+                              Container(
+                                height: 20.0,
+                                width: 20.0,
+                                margin: const EdgeInsets.only(right: 10.0),
+                                child: const CircularProgressIndicator(strokeWidth: 2, color: MyColors.whiteColor,),
+                              ),
+                            )
+                                :PrimaryButton(
+                              title: Constants.submitTitle,
+                              backgroundColor: MyColors.colorPrimary,
+                              borderColor: Colors.transparent,
+                              titleStyle: MyTextStyle.buttonTitle
+                                  .copyWith(color: MyColors.whiteColor),
+                              borderRadius: BorderRadius.circular(50.0),
+                              onPressed: () {
+                                authController
+                                    .resetPassword(
+                                        oldPassword: oldPasswordController.text,
+                                        newPassword: newPasswordController.text)
+                                    .then((value) {
+                                  if (value == true) {
+                                    Constants.resetSuccess.tr.showSnackbar(isSuccess: true);
+                                  }
+                                });
+                              },
+                            );
+                          }
                         )
                       ],
                     ));

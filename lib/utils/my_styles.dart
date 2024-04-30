@@ -21,7 +21,7 @@ class MyTextStyle {
 
   static var infoStyle = textStyle.copyWith(fontSize: 18, fontWeight: FontWeight.w400, color: MyColors.greyAccent);
   static var textFieldLabelStyle = textStyle.copyWith(fontSize: 15,fontWeight: FontWeight.w400, color: MyColors.blackColor);
-  static var textFieldTextStyle = textStyle.copyWith(fontWeight: FontWeight.w400, color: MyColors.blackColor);
+  static var textFieldTextStyle = textStyle.copyWith(fontWeight: FontWeight.w400, color: MyColors.blackColor,height: 1);
   static var textFieldHintTextStyle = textStyle.copyWith(fontWeight: FontWeight.w400, color: MyColors.greyAccent);
 
   static var appBarTitle = textStyle.copyWith(fontWeight: FontWeight.w600, );

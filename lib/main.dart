@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:raudhatul_muhabbah/cotrollers/auth_controller.dart';
 import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
+import 'package:raudhatul_muhabbah/cotrollers/login_controller.dart';
+import 'package:raudhatul_muhabbah/cotrollers/singup_controller.dart';
 import 'package:raudhatul_muhabbah/routes/rutes.dart';
 import 'package:raudhatul_muhabbah/screens/splash_screen.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
@@ -16,6 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(DashboardController());
+    Get.put(AuthController());
+    Get.put(SignupController());
+    Get.put(LoginController());
     return GetMaterialApp(
       title: Constants.appName,
       theme: ThemeData(
