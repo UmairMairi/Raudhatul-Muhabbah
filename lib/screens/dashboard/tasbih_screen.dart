@@ -22,7 +22,7 @@ class TasbihScreen extends StatefulWidget {
 }
 
 class _TasbihScreenState extends State<TasbihScreen> {
-  var list = ["sdhachjkdbshjk bsdjfhb dhjsfb ", "csdlhjgvdhjkfsv jdhsfb "];
+  var list = ["اللهـــــــــــــــم صلِّ وسلِّم عليه وعلى آله "];
   final _controller = TextEditingController();
   var count = 0;
 
