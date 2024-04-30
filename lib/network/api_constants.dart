@@ -3,7 +3,7 @@ class ApiConstants {
   static const String baseUrlLocal = "http://127.0.0.1/";
   static const String BASE_URL = (false) ? baseUrlLocal : baseUrlLive;
 
-  static const String register = "${BASE_URL}base/system_user_registeration/";
+  static const String register = "${BASE_URL}base/system_user_activation/";
   static const String login = "${BASE_URL}auth/token/";
   static const String getProfileDetails = "${BASE_URL}base/system_user_registeration/";
   static const String updateProfile = "${BASE_URL}base/system_user_registeration/";

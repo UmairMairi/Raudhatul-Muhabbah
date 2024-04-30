@@ -280,7 +280,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           borderColor: Colors.transparent,
                           titleStyle: MyTextStyle.buttonTitle.copyWith(
                               fontWeight: FontWeight.normal,
-                              color: MyColors.colorBlue),
+                              color: MyColors.whiteColor),
                           leadingChild: Container(
                             height: 20.0,
                             width: 20.0,
@@ -308,7 +308,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   gender: genderController.text.toLowerCase()).then((value) {
                                     if(value == true){
                                       Constants.registerSuccess.showSnackbar(isSuccess: true);
-                                      Get.offAllNamed(LoginScreen.tag);
+                                      Get.offAndToNamed(LoginScreen.tag);
                                     }
                               });
                             }
