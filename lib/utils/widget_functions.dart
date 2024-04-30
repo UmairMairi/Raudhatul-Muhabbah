@@ -17,19 +17,18 @@ class WidgetFunction {
       Color? backgroundColor}) {
     return AppBar(
       automaticallyImplyLeading: false,
-      elevation: 0,
       backgroundColor: backgroundColor ?? Colors.white,
-      surfaceTintColor: Colors.transparent,
+      surfaceTintColor: backgroundColor ?? Colors.white,
+      elevation: 20,
       leading: leading,
+      leadingWidth: 60,
       actions: actions,
       centerTitle: centerTitle,
-      title: (title != null)
-          ? Text(
+      title: (title != null) ? Text(
               title,
               style: MyTextStyle.appBarTitle
                   .copyWith(color: titleColor ?? Colors.black),
-            )
-          : null,
+            ) : null,
     );
   }
 

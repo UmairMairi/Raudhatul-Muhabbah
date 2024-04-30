@@ -1,6 +1,8 @@
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
@@ -50,12 +52,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
       const DailyBenefitsScreen(),
     ];
     _tabs = List.of([
-      TabItem(Icons.history, "History", MyColors.whiteColor,labelStyle: MyTextStyle.text.copyWith(color: MyColors.whiteColor),),
-      TabItem(Icons.home_outlined, "Home", MyColors.whiteColor,labelStyle: MyTextStyle.text.copyWith(color: MyColors.whiteColor)),
-      TabItem(Icons.account_circle_outlined, "Profile",MyColors.whiteColor,labelStyle: MyTextStyle.text.copyWith(color: MyColors.whiteColor)),
+      TabItem(Icons.history, "History", MyColors.whiteColor, labelStyle: MyTextStyle.medium.copyWith(fontSize:18,color: MyColors.whiteColor),),
+      TabItem(Icons.home_outlined, "Home", MyColors.whiteColor, labelStyle: MyTextStyle.medium.copyWith(fontSize:18,color: MyColors.whiteColor)),
+      TabItem(Icons.account_circle_outlined, "Profile", MyColors.whiteColor, labelStyle: MyTextStyle.medium.copyWith(fontSize:18,color: MyColors.whiteColor)),
     ]);
 
-    _navigationController  =  CircularBottomNavigationController(index);
+    _navigationController = CircularBottomNavigationController(index);
   }
 
   @override
@@ -71,7 +73,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return Scaffold(
         key: _scaffoldKey,
         extendBodyBehindAppBar: false,
-        drawer: Drawer(
+        endDrawer: Drawer(
           backgroundColor: MyColors.colorPrimaryDark,
           child: Padding(
             padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
@@ -80,11 +82,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Image.asset(
-                      Images.appLogo,
-                      color: MyColors.whiteColor,
-                      height: 150,
+                    const SizedBox(height: 40),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:10.0),
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            Images.appLogo2,
+                            color: MyColors.whiteColor,
+                            height: 100,
+                          ),
+                          const Spacer(),
+                          GestureDetector(
+                            onTap: (){
+                              _scaffoldKey.currentState?.closeEndDrawer();
+                            },
+                            child: Container(
+                                child: SvgPicture.asset(
+                                  Images.iconClose,
+                                  height: 40,
+                                  width: 40,
+                                )),
+                          )
+                        ],
+                      ),
                     ),
+                    const SizedBox(height: 20),
                     const Divider(
                       color: MyColors.whiteColor,
                       height: 1,
@@ -100,7 +123,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         setState(() {
                           index = 1;
                         });
-                        _scaffoldKey.currentState?.closeDrawer();
+                        _scaffoldKey.currentState?.closeEndDrawer();
+
                       },
                     ),
                     ListTile(
@@ -114,7 +138,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         setState(() {
                           index = 3;
                         });
-                        _scaffoldKey.currentState?.closeDrawer();
+                        _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
                     ListTile(
@@ -128,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         setState(() {
                           index = 4;
                         });
-                        _scaffoldKey.currentState?.closeDrawer();
+                        _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
                     ListTile(
@@ -145,7 +169,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         setState(() {
                           index = 2;
                         });
-                        _scaffoldKey.currentState?.closeDrawer();
+                        _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
                     ListTile(
@@ -162,7 +186,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         setState(() {
                           index = 0;
                         });
-                        _scaffoldKey.currentState?.closeDrawer();
+                        _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
                     ListTile(
@@ -179,7 +203,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         setState(() {
                           index = 5;
                         });
-                        _scaffoldKey.currentState?.closeDrawer();
+                        _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
                     const Divider(
@@ -194,8 +218,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             .copyWith(color: MyColors.whiteColor),
                       ),
                       onTap: () {
-                        MyPrefUtils.clearCaches().then((value)=> Get.offAllNamed(LoginScreen.tag));
-                        _scaffoldKey.currentState?.closeDrawer();
+                        MyPrefUtils.clearCaches()
+                            .then((value) => Get.offAllNamed(LoginScreen.tag));
+                        _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
                     const Divider(
@@ -273,12 +298,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
         ),
         appBar: WidgetFunction.awnAppBar(
-          leading: Image.asset(Images.appLogo),
+          leading: Container(
+            padding: const EdgeInsets.all(5.0),
+            margin: const EdgeInsets.only(left:10.0),
+            child: Image.asset(Images.appLogo2,),
+          ),
           backgroundColor: Colors.transparent,
           actions: [
             InkWell(
               onTap: () {
-                _scaffoldKey.currentState?.openDrawer();
+                // _scaffoldKey.currentState?.openDrawer();
+                _scaffoldKey.currentState!.openEndDrawer();
               },
               child: Container(
                   padding: const EdgeInsets.all(10.0),
@@ -287,40 +317,51 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     height: 30.0,
                     width: 30.0,
                   )),
-            )
+            ),
+           const SizedBox(width: 5,)
           ],
         ),
         backgroundColor: MyColors.backgroundColor,
-        body: list[index],
+        body: Column(
+          children: [
+            const Divider(),
+            Expanded(child: list[index]),
+          ],
+        ),
         bottomNavigationBar: CircularBottomNavigation(
-            _tabs,
+          barHeight:80,
+          _tabs,
           controller: _navigationController,
           barBackgroundColor: MyColors.colorPrimary,
           normalIconColor: MyColors.whiteColor,
           selectedIconColor: MyColors.colorPrimary,
           circleStrokeWidth: 2,
+          circleSize: 70,
           selectedCallback: (int? selectedPos) {
-            switch(selectedPos){
-              case 0:{
-                setState(() {
-                  index = 0;
-                  _navigationController.value = 0;
-                });
-              }
+            switch (selectedPos) {
+              case 0:
+                {
+                  setState(() {
+                    index = 0;
+                    _navigationController.value = 0;
+                  });
+                }
                 break;
-              case 1:{
-                setState(() {
-                  index = 1;
-                  _navigationController.value = 1;
-                });
-              }
+              case 1:
+                {
+                  setState(() {
+                    index = 1;
+                    _navigationController.value = 1;
+                  });
+                }
                 break;
-              case 2:{
-                setState(() {
-                  index = 2;
-                  _navigationController.value = 2;
-                });
-              }
+              case 2:
+                {
+                  setState(() {
+                    index = 2;
+                    _navigationController.value = 2;
+                  });
+                }
                 break;
             }
           },
