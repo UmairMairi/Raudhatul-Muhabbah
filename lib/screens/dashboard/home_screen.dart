@@ -1,15 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
+import 'package:raudhatul_muhabbah/extentions/int_extentions.dart';
 import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
-import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
+import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
@@ -81,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         children: [
                           Expanded(child: Obx(() {
                             return Text(
-                                "${Constants.targets} : ${controller.highestAchieverModel.value?.targetValue ?? 0}",
+                                "${Constants.targets} : ${controller.highestAchieverModel.value?.targetValue.format() ?? 0}",
                                 style: MyTextStyle.subTitle
                                     .copyWith(color: MyColors.colorBlue));
                           })),
@@ -92,10 +89,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Obx(() {
                                 return PrimaryButton(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 15.0),
-                                  title:
-                                      "${Constants.achievement} : ${controller.highestAchieverModel.value?.achievementValue ?? 0}",
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
+                                  title: "${Constants.achievement} : ${controller.highestAchieverModel.value?.achievementValue.format() ?? 0}",
                                   textColor: MyColors.colorPrimary,
                                   backgroundColor: MyColors.colorPrimaryAccent,
                                   borderColor: Colors.transparent,
@@ -196,8 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       )
-                    : (controller.latestTargetModel.value != null &&
-                            controller.latestTargetModel.value!.isNotEmpty)
+                    : (controller.latestTargetModel.value != null && controller.latestTargetModel.value!.isNotEmpty)
                         ? Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -388,7 +382,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Obx(() {
                 return Text(
-                    "${Constants.totalSalutations} ${controller.totalAchievements.value ?? 0}",
+                    "${Constants.totalSalutations} ${(controller.totalAchievements.value ?? 0).format()}",
                     style: MyTextStyle.subTitle);
               }),
               const SizedBox(

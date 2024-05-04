@@ -1,13 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/cotrollers/dashboard_controller.dart';
 import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
-import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
-import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
-import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
@@ -46,18 +41,18 @@ class _DailyBenefitsScreenState extends State<DailyBenefitsScreen> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: MyColors.backgroundColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(Constants.benefitsTitle, style: MyTextStyle.title),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Container(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(Constants.benefitsTitle, style: MyTextStyle.title),
+            const SizedBox(
+              height: 10.0,
+            ),
+            Expanded(
+              child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
                     horizontal: 10.0, vertical: 10.0),
@@ -272,7 +267,6 @@ class _DailyBenefitsScreenState extends State<DailyBenefitsScreen> {
                         )
                       : ListView.builder(
                           itemCount: controller.benefitsModel.value?.length ?? 0,
-                          shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Container(
                                 padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
@@ -297,8 +291,9 @@ class _DailyBenefitsScreenState extends State<DailyBenefitsScreen> {
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
                                               WidgetFunction.showAlertDialog(
+
                                                   extraDetails: Column(
-                                                children: [
+                                                  children: [
                                                   Row(
                                                     children: [
                                                       Text(Constants.benefitsDetails, style: MyTextStyle.title),
@@ -319,14 +314,18 @@ class _DailyBenefitsScreenState extends State<DailyBenefitsScreen> {
                                                   const Divider(),
                                                   const SizedBox(height: 10.0,),
                                                   Container(
+                                                    // height: MediaQuery.of(context).size.height*0.6,
+                                                    constraints: BoxConstraints(maxHeight:  MediaQuery.of(context).size.height*0.6),
                                                     padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
                                                     decoration: BoxDecoration(
                                                       color: Colors.grey.withOpacity(0.1),
                                                       borderRadius: BorderRadius.circular(10.0),
                                                       border: Border.all(color: MyColors.greyBorderColor),
                                                     ),
-                                                    child: Text(controller.benefitsModel.value?[index].text ?? "",
-                                                        style: MyTextStyle.normal.copyWith(fontSize: 18)),
+                                                    child: SingleChildScrollView(
+                                                      child: Text(controller.benefitsModel.value?[index].text ?? "",
+                                                          style: MyTextStyle.normal.copyWith(fontSize: 18)),
+                                                    ),
                                                   )
                                                 ],
                                               ));
@@ -340,11 +339,11 @@ class _DailyBenefitsScreenState extends State<DailyBenefitsScreen> {
                         );
                 }),
               ),
-              const SizedBox(
-                height: 10.0,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 10.0,
+            ),
+          ],
         ),
       ),
     );

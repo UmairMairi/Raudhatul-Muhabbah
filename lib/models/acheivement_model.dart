@@ -2,7 +2,6 @@
 //
 //     final achievementModel = achievementModelFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 AchievementModel achievementModelFromJson(String str) => AchievementModel.fromJson(json.decode(str));

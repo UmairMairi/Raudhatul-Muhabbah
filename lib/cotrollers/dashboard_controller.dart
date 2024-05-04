@@ -30,7 +30,9 @@ class DashboardController extends BaseController {
     try {
       var response = await HttpServices.getJson(url: ApiConstants.highestAchiever, token: Singleton.token,);
       if (response.isSuccessful()) {
-        highestAchieverModel.value = highestAchieverModelFromJson(response.body);
+        if(response.body!="[]"){
+          highestAchieverModel.value = highestAchieverModelFromJson(response.body);
+        }
         isHighestAchievementLoading.value = false;
         return highestAchieverModel.value;
       } else {

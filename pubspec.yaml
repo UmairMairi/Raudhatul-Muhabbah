@@ -41,6 +41,11 @@ dependencies:
   circular_bottom_navigation: ^2.4.0
   shared_preferences: ^2.2.3
   intl: ^0.19.0
+  quick_actions: ^1.0.7
+  firebase_messaging: ^14.7.18
+  firebase_core: ^2.26.0
+  flutter_local_notifications: ^16.3.3
+
 
 dev_dependencies:
   flutter_test:

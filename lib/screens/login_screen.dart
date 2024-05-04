@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:raudhatul_muhabbah/cotrollers/auth_controller.dart';
 import 'package:raudhatul_muhabbah/cotrollers/login_controller.dart';
 import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
 import 'package:raudhatul_muhabbah/models/login_model.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
-import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
 import 'package:raudhatul_muhabbah/utils/PrefUtils.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
