@@ -1,4 +1,4 @@
-package com.raudhatulmahabbah.www.twa.raudhatul_muhabbah
+package com.raudhatulmahabbah.www.twa
 
 import io.flutter.embedding.android.FlutterActivity
 

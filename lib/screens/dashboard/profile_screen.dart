@@ -39,9 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   void initState() {
     super.initState();
-    controller
-        .getProfileDetails(id: "${Singleton.loginModel?.userId}")
-        .then((value) {
+    controller.getProfileDetails(id: "${Singleton.loginModel?.userId}").then((value) {
       firstNameController.text = value?.firstName ?? "";
       lastNameController.text = value?.lastName ?? "";
       emailController.text = value?.email ?? "";

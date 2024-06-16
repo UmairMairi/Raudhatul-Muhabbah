@@ -10,7 +10,7 @@ import 'package:raudhatul_muhabbah/utils/singlton.dart';
 class HttpServices {
   static var internetMsg = {
     'success': false,
-    'message': 'No internet connection!'.tr
+    'error': 'No internet connection!'.tr
   };
 
   static Future<bool> hasNetwork() async {

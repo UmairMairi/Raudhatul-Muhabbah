@@ -10,8 +10,10 @@ import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
+import 'package:raudhatul_muhabbah/utils/date_utils.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
 import 'package:raudhatul_muhabbah/utils/shimmer.dart';
+import 'package:raudhatul_muhabbah/utils/singlton.dart';
 import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,6 +38,18 @@ class _HomeScreenState extends State<HomeScreen> {
     controller.getHighestAchievement();
     controller.getTotalAchievements();
     controller.getLatestTargets();
+    controller.getPrayerTimes();
+    controller
+        .getProfileDetails(id: "${Singleton.loginModel?.userId}")
+        .then((value) {
+      controller.updateProfile(
+          id: "${Singleton.loginModel?.userId}",
+          fName: value?.firstName ?? "",
+          lastName: value?.lastName ?? "",
+          email: value?.email ?? "",
+          phone: value?.profile?.phoneNo ?? "",
+          address: value?.profile?.pAddress ?? "");
+    });
   }
 
   @override
@@ -89,8 +103,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Obx(() {
                                 return PrimaryButton(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 15.0),
-                                  title: "${Constants.achievement} : ${controller.highestAchieverModel.value?.achievementValue.format() ?? 0}",
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 15.0),
+                                  title:
+                                      "${Constants.achievement} : ${controller.highestAchieverModel.value?.achievementValue.format() ?? 0}",
                                   textColor: MyColors.colorPrimary,
                                   backgroundColor: MyColors.colorPrimaryAccent,
                                   borderColor: Colors.transparent,
@@ -191,7 +207,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                       )
-                    : (controller.latestTargetModel.value != null && controller.latestTargetModel.value!.isNotEmpty)
+                    : (controller.latestTargetModel.value != null &&
+                            controller.latestTargetModel.value!.isNotEmpty)
                         ? Container(
                             width: double.infinity,
                             decoration: BoxDecoration(
@@ -225,7 +242,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .copyWith(
                                                           fontWeight:
                                                               FontWeight.bold)),
-                                              if(controller.latestTargetModel.value!.first.targetValue! < 1000)Text(Constants.motivation, style: MyTextStyle.medium.copyWith(fontSize: 14, color: MyColors.greyAccent)),
+                                              if (controller
+                                                      .latestTargetModel
+                                                      .value!
+                                                      .first
+                                                      .targetValue! <
+                                                  1000)
+                                                Text(Constants.motivation,
+                                                    style: MyTextStyle.medium
+                                                        .copyWith(
+                                                            fontSize: 14,
+                                                            color: MyColors
+                                                                .greyAccent)),
                                             ],
                                           ),
                                         ],
@@ -283,7 +311,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   height: 20.0,
                                                 ),
                                                 Obx(() {
-                                                  return (controller.isSubmitAchievementLoading.value)
+                                                  return (controller
+                                                          .isSubmitAchievementLoading
+                                                          .value)
                                                       ? PrimaryButton(
                                                           title: Constants
                                                               .addingAchievement,
@@ -305,11 +335,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       50.0),
                                                           leadingChild:
                                                               Container(
-                                                                  height: 20.0,
-                                                                  width: 20.0,
-                                                                  margin: const EdgeInsets.only(right: 10.0),
-                                                                  child: const CircularProgressIndicator(strokeWidth: 2, color: MyColors.whiteColor,),
-                                                              ),
+                                                            height: 20.0,
+                                                            width: 20.0,
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    right:
+                                                                        10.0),
+                                                            child:
+                                                                const CircularProgressIndicator(
+                                                              strokeWidth: 2,
+                                                              color: MyColors
+                                                                  .whiteColor,
+                                                            ),
+                                                          ),
                                                         )
                                                       : PrimaryButton(
                                                           title: Constants
@@ -330,12 +369,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                       50.0),
                                                           onPressed: () {
                                                             controller
-                                                                .submitAchievement(achievementValue: achievementController.text,
-                                                                    targetId: controller.latestTargetModel.value!.first.id!)
+                                                                .submitAchievement(
+                                                                    achievementValue:
+                                                                        achievementController
+                                                                            .text,
+                                                                    targetId: controller
+                                                                        .latestTargetModel
+                                                                        .value!
+                                                                        .first
+                                                                        .id!)
                                                                 .then((value) {
                                                               Get.back();
-                                                              controller.getLatestTargets();
-                                                              controller.getTotalAchievements();
+                                                              controller
+                                                                  .getLatestTargets();
+                                                              controller
+                                                                  .getTotalAchievements();
                                                             });
                                                           },
                                                         );
@@ -426,23 +474,51 @@ class _HomeScreenState extends State<HomeScreen> {
                         )),
                   );
                 }
-                return PrimaryButton(
-                  title: Constants.submitTitle,
-                  backgroundColor: MyColors.colorPrimary,
-                  borderColor: Colors.transparent,
-                  textColor: MyColors.whiteColor,
-                  borderRadius: BorderRadius.circular(50.0),
-                  onPressed: () {
-                    controller
-                        .submitTarget(targets: targetsController.text)
-                        .then((value) {
-                      if (value?.id != null) {
-                        targetsController.clear();
-                        controller.getLatestTargets();
-                      }
-                    });
-                  },
-                );
+                return Obx(() {
+                  return (controller.prayerTimeLoading.value)
+                      ? Shimmer.fromColors(
+                          baseColor: MyColors.shimmerBaseColor,
+                          highlightColor: MyColors.shimmerHighlightColor,
+                          child: PrimaryButton(
+                            title: Constants.addingAchievement,
+                            backgroundColor:
+                                MyColors.colorPrimary.withOpacity(0.8),
+                            borderColor: Colors.transparent,
+                            titleStyle: MyTextStyle.buttonTitle
+                                .copyWith(color: MyColors.whiteColor),
+                            borderRadius: BorderRadius.circular(50.0),
+                            leadingChild: Container(
+                              height: 20.0,
+                              width: 20.0,
+                              margin: const EdgeInsets.only(right: 10.0),
+                              child: const CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: MyColors.whiteColor,
+                              ),
+                            ),
+                          ),
+                        )
+                      : Builder(builder: (context) {
+                          DateTimeUtils.getDateTimeFromLoop();
+                          return PrimaryButton(
+                            title: Constants.submitTitle,
+                            backgroundColor: MyColors.colorPrimary,
+                            borderColor: Colors.transparent,
+                            textColor: MyColors.whiteColor,
+                            borderRadius: BorderRadius.circular(50.0),
+                            onPressed: () {
+                              controller
+                                  .submitTarget(targets: targetsController.text)
+                                  .then((value) {
+                                if (value?.id != null) {
+                                  targetsController.clear();
+                                  controller.getLatestTargets();
+                                }
+                              });
+                            },
+                          );
+                        });
+                });
               }),
               const SizedBox(
                 height: 20.0,

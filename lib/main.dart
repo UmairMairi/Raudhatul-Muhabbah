@@ -9,8 +9,12 @@ import 'package:raudhatul_muhabbah/routes/rutes.dart';
 import 'package:raudhatul_muhabbah/screens/splash_screen.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
+import 'package:raudhatul_muhabbah/utils/notification_utils.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationUtils.initFirebase();
+
   runApp(const MyApp());
 }
 
@@ -34,7 +38,6 @@ class MyApp extends StatelessWidget {
           ),
         ),
         useMaterial3: true,
-
       ),
       builder: (context, child) {
         return MediaQuery(

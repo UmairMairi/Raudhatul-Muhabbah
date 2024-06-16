@@ -15,4 +15,5 @@ class ApiConstants {
   static const String totalAchievements = "${BASE_URL}swala/totalAchievements/";
   static const String latestAchievement = "${BASE_URL}swala/latestAchievement/";
   static const String resetPassword = "${BASE_URL}auth/password/";
+  static const String getPrayerTimes = "https://api.aladhan.com/v1/calendar/2017/4";
 }

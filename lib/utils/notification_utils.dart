@@ -14,7 +14,13 @@ class NotificationUtils {
   static late String firebaseToken;
 
   static initFirebase() async {
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyDn_-FyrBOU7VAF3jJfXSsjoVSrlvMLymI",
+          appId: "1:859475755995:android:1cc6474a1f64545b475dfe",
+          messagingSenderId:"859475755995",
+          projectId: "raudha-e3bb4")
+    );
 
     messaging = FirebaseMessaging.instance;
 
@@ -110,7 +116,7 @@ class NotificationUtils {
                 largeIcon: const DrawableResourceAndroidBitmap('@mipmap/ic_launcher'),
                 channelShowBadge: true,
                 autoCancel: true,
-                icon: '@drawable/app_icon_awn',
+                icon: '@drawable/app_icon',
               ),
             ),
             payload: action);
