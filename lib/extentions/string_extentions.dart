@@ -173,4 +173,39 @@ extension NullableStringExtention on String? {
     }
   }
 
+  DateTime? pdtTimeToDateTime() {
+    if (this == null) return null;
+    try {
+      // Input time string
+      String inputTime = this!;
+
+      // Extract time and timezone abbreviation
+      var regExp = RegExp(r"(\d{2}):(\d{2}) \((\w{3})\)");
+      var match = regExp.firstMatch(inputTime);
+
+      if (match != null && match.groupCount == 3) {
+        var hours = int.parse(match.group(1)!);
+        var minutes = int.parse(match.group(2)!);
+        var timezoneAbbr = match.group(3);
+
+        // Get current date
+        var now = DateTime.now();
+
+        // Create a DateTime object for today with the specified time
+        var todayWithTime = DateTime(now.year, now.month, now.day, hours, minutes);
+
+        // Format the DateTime object with timezone abbreviation
+        // var formattedTime = DateFormat("HH:mm (zzz)").format(todayWithTime);
+        print(todayWithTime); // Output: 05:40 (PDT)
+        return todayWithTime;
+      }
+      print("Invalid input time format");
+      return null;
+    } catch (e) {
+      if (kDebugMode) {
+        print("Exception---------------->$e");
+      }
+      return null;
+    }
+  }
 }
