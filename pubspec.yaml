@@ -46,6 +46,7 @@ dependencies:
   firebase_core: ^2.26.0
   flutter_local_notifications: ^16.3.3
   geolocator: ^11.0.0
+  adhan: ^2.0.0+1
 
 dev_dependencies:
   flutter_test:

@@ -57,8 +57,7 @@ class DashboardController extends BaseController {
 
   RxBool isSubmitAchievementLoading = false.obs;
 
-  Future<SubmitTargetModel?> submitAchievement(
-      {required int targetId, required String achievementValue}) async {
+  Future<SubmitTargetModel?> submitAchievement({required int targetId, required String achievementValue}) async {
     isSubmitAchievementLoading.value = true;
     try {
       var body = {"achievement_value": achievementValue, "target": targetId};
@@ -352,4 +351,36 @@ class DashboardController extends BaseController {
     // continue accessing the position of the device.
     return await Geolocator.getCurrentPosition();
   }
+
+
+  bool activateTargetForm({required DateTime? fajar,required  DateTime? dhuhur}) {
+    if(fajar == null || dhuhur == null){
+      return false;
+    }
+    var now = DateTime.now();
+    /// a week starts with Monday, which has the value 1.
+    if(now.weekday == 5){
+      return true;
+    }else if(now.weekday == 4){
+      return now.isAfter(dhuhur);
+    }else if(now.weekday == 6){
+      return now.isBefore(fajar);
+    }
+    return false;
+  }
+
+  bool activateAchievementForm({required DateTime? fajar,required  DateTime? maghrib}) {
+    if(fajar == null || maghrib == null){
+      return false;
+    }
+    var now = DateTime.now();
+    /// a week starts with Monday, which has the value 1.
+    if(now.weekday == 5){
+      return now.isAfter(maghrib);
+    }else if(now.weekday == 6){
+      return now.isBefore(fajar);
+    }
+    return false;
+  }
+
 }

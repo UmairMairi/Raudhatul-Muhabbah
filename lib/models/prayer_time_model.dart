@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
+
 PrayerTimeModel prayerTimeModelFromJson(String str) => PrayerTimeModel.fromJson(json.decode(str));
 
 String prayerTimeModelToJson(PrayerTimeModel data) => json.encode(data.toJson());
@@ -553,13 +555,13 @@ class Params {
 }
 
 class Timings {
-  final String? fajr;
+  final DateTime? fajr;
   final String? sunrise;
-  final String? dhuhr;
-  final String? asr;
+  final DateTime? dhuhr;
+  final DateTime? asr;
   final String? sunset;
-  final String? maghrib;
-  final String? isha;
+  final DateTime? maghrib;
+  final DateTime? isha;
   final String? imsak;
   final String? midnight;
   final String? firstthird;
@@ -580,13 +582,13 @@ class Timings {
   });
 
   Timings copyWith({
-    String? fajr,
+    DateTime? fajr,
     String? sunrise,
-    String? dhuhr,
-    String? asr,
+    DateTime? dhuhr,
+    DateTime? asr,
     String? sunset,
-    String? maghrib,
-    String? isha,
+    DateTime? maghrib,
+    DateTime? isha,
     String? imsak,
     String? midnight,
     String? firstthird,
@@ -607,13 +609,13 @@ class Timings {
       );
 
   factory Timings.fromJson(Map<String, dynamic> json) => Timings(
-    fajr: json["Fajr"],
+    fajr: json["Fajr"] is String ? (json["Fajr"] as String).pdtTimeToDateTime() :null,
     sunrise: json["Sunrise"],
-    dhuhr: json["Dhuhr"],
-    asr: json["Asr"],
+    dhuhr: json["Dhuhr"] is String ? (json["Dhuhr"] as String).pdtTimeToDateTime() :null,
+    asr: json["Asr"] is String ? (json["Asr"] as String).pdtTimeToDateTime() :null,
     sunset: json["Sunset"],
-    maghrib: json["Maghrib"],
-    isha: json["Isha"],
+    maghrib: json["Maghrib"] is String ? (json["Maghrib"] as String).pdtTimeToDateTime() :null,
+    isha: json["Isha"] is String ? (json["Isha"] as String).pdtTimeToDateTime() :null,
     imsak: json["Imsak"],
     midnight: json["Midnight"],
     firstthird: json["Firstthird"],

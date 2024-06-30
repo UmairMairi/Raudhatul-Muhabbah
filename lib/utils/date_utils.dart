@@ -1,3 +1,6 @@
+import 'package:adhan/adhan.dart';
+import 'package:flutter/foundation.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 
 class DateTimeUtils {
@@ -50,7 +53,28 @@ class DateTimeUtils {
     print(result); // Output: Current date with time 16:36 (BST) converted to 12:00 with the same timezone
   }
 
+  static Future<void> isActiveTime() async {
+    var position = await _determinePosition();
+    var lat = position.latitude;
+    var lng = position.longitude;
 
+    final myCoordinates = Coordinates(lat,lng); // Replace with your own location lat, lng.
+    final params = CalculationMethod.other.getParameters();
+    params.madhab = Madhab.hanafi;
+    final prayerTimes = PrayerTimes.today(myCoordinates, params);
+    var dateTimeFajr = prayerTimes.fajr.toLocal().toString();
+    var dateTimeDhuhr = prayerTimes.dhuhr.toLocal().toString();
+    var dateTimeAsr = prayerTimes.asr.toLocal().toString();
+    var dateTimeMaghrib = prayerTimes.maghrib.toLocal().toString();
+    var dateTimeIsha = prayerTimes.isha.toLocal().toString();
+    if (kDebugMode) {
+      print("DateTime------------->$dateTimeFajr");
+      print("DateTime------------->$dateTimeDhuhr");
+      print("DateTime------------->$dateTimeAsr");
+      print("DateTime------------->$dateTimeMaghrib");
+      print("DateTime------------->$dateTimeIsha");
+    }
+  }
 
   static DateTime _addMonths(DateTime date, int months) {
     // Calculate the target month
@@ -80,5 +104,46 @@ class DateTimeUtils {
         date.minute, date.second, date.millisecond, date.microsecond);
 
     return newDate;
+  }
+
+  /// Determine the current position of the device.
+  ///
+  /// When the location services are not enabled or permissions
+  /// are denied the `Future` will return an error.
+  static Future<Position> _determinePosition() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+// Test if location services are enabled.
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+// Location services are not enabled don't continue
+// accessing the position and request users of the
+// App to enable the location services.
+      return Future.error('Location services are disabled.');
+    }
+
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+// Permissions are denied, next time you could try
+// requesting permissions again (this is also where
+// Android's shouldShowRequestPermissionRationale
+// returned true. According to Android guidelines
+// your App should show an explanatory UI now.
+        return Future.error('Location permissions are denied');
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+// Permissions are denied forever, handle appropriately.
+      return Future.error(
+          'Location permissions are permanently denied, we cannot request permissions.');
+    }
+
+// When we reach here, permissions are granted and we can
+// continue accessing the position of the device.
+    return await Geolocator.getCurrentPosition();
   }
 }

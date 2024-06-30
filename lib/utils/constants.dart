@@ -57,6 +57,8 @@ class Constants {
   static const String benefits = "Benefits";
   static const String readMore = "read more...";
   static const String showLess = "show less";
+  static const String targetAvailability = "Target form will be available from Thursday dhuhur to Saturday till the fajar time only";
+  static const String achievementsAvailability = "Target form will be available from Friday magharib to Saturday till the fajar time only";
 
   static const String yourTarget = "Your Target";
   static const String motivation = "(I know you can do more!)";
