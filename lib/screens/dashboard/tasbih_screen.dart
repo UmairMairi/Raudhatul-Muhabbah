@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/btn_primary.dart';
 import 'package:raudhatul_muhabbah/screens/widgets/TextFieldPrimary.dart';
+import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
 import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
+import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
 class TasbihScreen extends StatefulWidget {
   const TasbihScreen({super.key});
@@ -19,6 +21,22 @@ class _TasbihScreenState extends State<TasbihScreen> {
   var list = ["اللهـــــــــــــــم صلِّ وسلِّم عليه وعلى آله "];
   final _controller = TextEditingController();
   var count = 0;
+  AppBar? appbar;
+
+  @override
+  void initState() {
+    super.initState();
+    if(Get.arguments == "action") {
+      appbar = WidgetFunction.awnAppBar(
+        leading: Container(
+          padding: const EdgeInsets.all(5.0),
+          margin: const EdgeInsets.only(left:10.0),
+          child: Image.asset(Images.appLogo2,),
+        ),
+        backgroundColor: Colors.transparent,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +48,8 @@ class _TasbihScreenState extends State<TasbihScreen> {
       height = width;
     }
     return Scaffold(
-      extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: false,
+      appBar: appbar,
       backgroundColor: MyColors.backgroundColor,
       body: SingleChildScrollView(
         child: Padding(

@@ -15,6 +15,7 @@ import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/utils/PrefUtils.dart';
 import 'package:raudhatul_muhabbah/utils/assets_paths.dart';
 import 'package:raudhatul_muhabbah/utils/colors.dart';
+import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
 import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
@@ -233,7 +234,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     InkWell(
                       splashColor: Colors.grey,
                       onTap: () {
-                        "https://www.facebook.com".launch();
+                        Constants.facebookLink.launch();
                       },
                       child: Container(
                         height: 50.0,
@@ -253,7 +254,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     InkWell(
                       splashColor: Colors.grey,
                       onTap: () {
-                        "https://www.tiktok.com".launch();
+                        Constants.tiktokLink.launch();
                       },
                       child: Container(
                         height: 50.0,
@@ -273,7 +274,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     InkWell(
                       splashColor: Colors.grey,
                       onTap: () {
-                        "https://www.instagram.com".launch();
+                        Constants.instaLink.launch();
                       },
                       child: Container(
                         height: 50.0,

@@ -283,12 +283,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                     ),
-                  )
-                      : (controller.activateAchievementForm(
-                              fajar: controller.prayerTimeModel.value?.data?.first.timings?.fajr,
-                              maghrib: controller.prayerTimeModel.value?.data?.first.timings?.maghrib))
-                          ? Column(
-                              children: [
+                        )
+                      : Column(
+                          children: [
                                 Text(Constants.highestAchiever,
                                     style: MyTextStyle.subTitle),
                                 const SizedBox(
@@ -359,9 +356,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                   height: 10.0,
                                 ),
                                 Obx(() {
-                                  return (controller
-                                          .isLatestTargetLoading.value)
-                                      ? Shimmer.fromColors(
+                              return (controller.isLatestTargetLoading.value)
+                                  ? Shimmer.fromColors(
                                           highlightColor:
                                               MyColors.shimmerHighlightColor,
                                           baseColor: MyColors.shimmerBaseColor,
@@ -466,10 +462,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                         )
-                                      : (controller.latestTargetModel.value !=
-                                                  null &&
-                                              controller.latestTargetModel.value!.isNotEmpty)
-                                          ? Container(
+                                  : (controller.latestTargetModel.value !=
+                                              null &&
+                                          controller.latestTargetModel.value!
+                                              .isNotEmpty)
+                                      ? Container(
                                               width: double.infinity,
                                               decoration: BoxDecoration(
                                                 color: Colors.transparent,
@@ -531,8 +528,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ],
                                                         ),
                                                         const Spacer(),
-                                                        GestureDetector(
-                                                          onTap: () {
+                                                    if (controller
+                                                        .activateAchievementForm(
+                                                            fajar: controller
+                                                                .prayerTimeModel
+                                                                .value
+                                                                ?.data
+                                                                ?.first
+                                                                .timings
+                                                                ?.fajr,
+                                                            maghrib: controller
+                                                                .prayerTimeModel
+                                                                .value
+                                                                ?.data
+                                                                ?.first
+                                                                .timings
+                                                                ?.maghrib))
+                                                      GestureDetector(
+                                                        onTap: () {
                                                             WidgetFunction
                                                                 .showAlertDialog(
                                                               extraDetails:
@@ -691,11 +704,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           : Container();
                                 }),
                               ],
-                            )
-                          : Text(Constants.achievementsAvailability,
-                              textAlign: TextAlign.center,
-                              style: MyTextStyle.normal.copyWith(
-                                  fontSize: 16.0, color: MyColors.redColor));
+                        );
                 });
               }),
               const SizedBox(

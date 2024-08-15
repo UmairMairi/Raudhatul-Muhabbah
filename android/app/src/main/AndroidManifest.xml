@@ -28,7 +28,7 @@
     </queries>
     <!--#enddocregion android-queries-->
     <application
-        android:label="Raudhatul Muhabbah"
+        android:label="Raudhatul Mahabbah"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

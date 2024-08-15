@@ -1,5 +1,5 @@
 class Constants {
-  static const String appName = "Raudhatul Muhabbah";
+  static const String appName = "Raudhatul Mahabbah";
 
   //Login Screen
   static const String info = "Sign in to access your account";
@@ -58,7 +58,7 @@ class Constants {
   static const String readMore = "read more...";
   static const String showLess = "show less";
   static const String targetAvailability = "Target form will be available from Thursday dhuhur to Saturday till the fajar time only";
-  static const String achievementsAvailability = "Target form will be available from Friday magharib to Saturday till the fajar time only";
+  static const String achievementsAvailability = "Achievement form will be available from Friday magharib to Saturday till the fajar time only";
 
   static const String yourTarget = "Your Target";
   static const String motivation = "(I know you can do more!)";
@@ -75,6 +75,7 @@ class Constants {
   static const String benefitsDetails = "Benefits Details";
 
   //Tasbih Screen
+  static const String labelTasbih = "Tasbih";
   static const String tasbihTitle = "What dhikr are you doing today?";
   static const String addDhikr = "Add Dhikar";
   static const String noDhkirAvailbale = "Are you not doing dhikr today???";
@@ -94,4 +95,12 @@ class Constants {
   static const String validEmail = "Please Enter a valid email.";
   static const String validPassword = "Please Enter a valid password.";
   static const String passwordRange = "Password must be 8 characters.";
+
+
+  static const String facebookLink = "https://www.facebook.com/profile.php?id=61556715814661&mibextid=ZbWKwL";
+  static const String instaLink = "https://www.instagram.com/raudhatulmahabbah1445?igsh=MWVoNXBhZ2E5Ymljcw==";
+  static const String tiktokLink = "https://www.tiktok.com/@raudhatulmahabbah_1445?_t=8ou1rIThEv7&_r=1";
+
+
+
 }

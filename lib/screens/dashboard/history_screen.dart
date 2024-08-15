@@ -254,11 +254,17 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               width: double.infinity,
                               margin: const EdgeInsets.only(bottom: 10.0),
                               decoration: BoxDecoration(
-                                color: MyColors.salutationHistoryBackground,
+                                color: (controller.model.value![index].achievementValue ?? 0) <
+                                        (controller.model.value![index].targetValue ?? 0)
+                                    ? Colors.red.withOpacity(0.2)
+                                    : MyColors.salutationHistoryBackground,
                                 borderRadius: BorderRadius.circular(5.0),
                                 border: selectedIndex == index
                                     ? Border.all(
-                                        color: MyColors.colorPrimary,
+                                        color: (controller.model.value![index].achievementValue ?? 0) <
+                                            (controller.model.value![index].targetValue ?? 0)
+                                            ? Colors.red
+                                            : MyColors.colorPrimary,
                                         width: 1.0)
                                     : null,
                               ),
@@ -318,8 +324,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                           height: 5.0,
                                         ),
                                         Obx(() {
-                                            return Text("${controller.model.value![index].percentage ?? 10.0} %",
-                                                style: MyTextStyle.subTitle);
+                                          return Text(
+                                              "${controller.model.value![index].percentage ?? 0.0} %",
+                                              style: MyTextStyle.subTitle);
                                           }
                                         ),
                                         const SizedBox(

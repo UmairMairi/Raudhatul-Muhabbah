@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quick_actions/quick_actions.dart';
+import 'package:raudhatul_muhabbah/cotrollers/auth_controller.dart';
+import 'package:raudhatul_muhabbah/extentions/string_extentions.dart';
 import 'package:raudhatul_muhabbah/models/login_model.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/tasbih_screen.dart';
@@ -20,24 +22,45 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  String _shortcut = 'no action set';
   @override
   void initState() {
     super.initState();
-    // Future.delayed(Duration.zero,()async{
-    //   var model = await MyPrefUtils.getString(MyPrefUtils.loginModel);
-    //   if(model.isNotEmpty){
-    //     var loginModel = loginModelFromJson(model);
-    //     Singleton.token = loginModel.key;
-    //     Singleton.loginModel = loginModel;
-    //     Get.offNamed(DashboardScreen.tag);
-    //   }else{
-    //     Get.offNamed(LoginScreen.tag);
-    //   }
-    // });
-    Future.delayed(Duration.zero,()async{
-      setupShortcuts();
+    _initializeSplashScreen();
+  }
+
+  void _initializeSplashScreen() {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await _setupShortcuts();
+      _handleNavigation();
     });
   }
+  Future<void> _setupShortcuts() async {
+    const QuickActions quickActions = QuickActions();
+
+    quickActions.initialize((String shortcutType) {
+      setState(() {
+        _shortcut = shortcutType;
+      });
+    });
+
+    await quickActions.setShortcutItems(<ShortcutItem>[
+      const ShortcutItem(
+        type: 'action',
+        localizedTitle: 'Tasbih',
+        icon: 'ic_launcher',
+      ),
+    ]);
+  }
+
+  void _handleNavigation() {
+    if (_shortcut == "action") {
+      Get.offAllNamed(TasbihScreen.tag,arguments: "action");
+    } else {
+      navigator();
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -61,23 +84,6 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
-  }
-
-  setupShortcuts() {
-    String shortcut = 'no action set';
-    const QuickActions quickActions = QuickActions();
-    quickActions.initialize((String shortcutType) {
-      shortcut = shortcutType;
-    });
-    quickActions.setShortcutItems(<ShortcutItem>[
-      const ShortcutItem(type: 'action', localizedTitle: 'Tasbih', icon: 'ic_launcher'),
-    ]).then((void _) async {
-      if (shortcut == 'action') {
-        Get.offNamed(TasbihScreen.tag);
-      }else{
-        navigator();
-      }
-    });
   }
 
   navigator({String route = DashboardScreen.tag}) async {

@@ -302,7 +302,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                   email: emailController.text,
                                   address: addressController.text,
                                   phone: phoneController.text,
-                                  password: phoneController.text,
+                                  password: passwordController.text,
                                   gender: genderController.text.toLowerCase()).then((value) {
                                     if(value == true){
                                       Constants.registerSuccess.showSnackbar(isSuccess: true);

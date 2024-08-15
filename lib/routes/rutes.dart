@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:raudhatul_muhabbah/screens/about_screen.dart';
 import 'package:raudhatul_muhabbah/screens/dashboard/dashboard_screen.dart';
+import 'package:raudhatul_muhabbah/screens/dashboard/tasbih_screen.dart';
 import 'package:raudhatul_muhabbah/screens/login_screen.dart';
 import 'package:raudhatul_muhabbah/screens/signup_screen.dart';
 import 'package:raudhatul_muhabbah/screens/splash_screen.dart';
@@ -14,6 +15,7 @@ class AppRoutes {
         Generalized.generalized(SignupScreen.tag, () => const SignupScreen()),
         Generalized.generalized(DashboardScreen.tag, () => const DashboardScreen()),
         Generalized.generalized(AboutScreen.tag, () => const AboutScreen()),
+        Generalized.generalized(TasbihScreen.tag, () => const TasbihScreen()),
       ];
 
 //  extra  screen
