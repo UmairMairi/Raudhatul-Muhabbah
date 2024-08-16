@@ -13,8 +13,7 @@ class LoginController extends AuthController {
   RxnString password = RxnString();
   RxBool isLoginLoading = false.obs;
 
-  Future<LoginModel?> login(
-      {required String email, required String password}) async {
+  Future<LoginModel?> login({required String email, required String password}) async {
     try {
       isLoginLoading.value = true;
       var body = {
@@ -25,6 +24,7 @@ class LoginController extends AuthController {
           await HttpServices.postJson(url: ApiConstants.login, body: body);
       if (response.isSuccessful()) {
         var model = loginModelFromJson(response.body);
+        isLoginLoading.value = false;
         return model;
       } else {
         "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();

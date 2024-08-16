@@ -503,7 +503,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             Row(
                                                               children: [
                                                                 Text(
-                                                                    "${controller.latestTargetModel.value!.first.targetValue} ",
+                                                                    "${controller.latestTargetModel.value!.first.targetValue?.format()} ",
                                                                     style: MyTextStyle
                                                                         .subTitle
                                                                         .copyWith(

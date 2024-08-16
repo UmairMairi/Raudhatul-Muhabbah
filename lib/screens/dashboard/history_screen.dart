@@ -325,7 +325,11 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                         ),
                                         Obx(() {
                                           return Text(
-                                              "${controller.model.value![index].percentage ?? 0.0} %",
+                                              getPercentage(
+                                                  percentage: controller
+                                                      .model
+                                                      .value![index]
+                                                      .percentage),
                                               style: MyTextStyle.subTitle);
                                           }
                                         ),
@@ -352,5 +356,18 @@ class _HistoryScreenState extends State<HistoryScreen> {
         ),
       ),
     );
+  }
+
+  String getPercentage({required String? percentage}) {
+    switch (percentage) {
+      case "0.0" || "0.00" || null:
+        {
+          return "Percentage not Available Yet";
+        }
+      default:
+        {
+          return "$percentage %";
+        }
+    }
   }
 }

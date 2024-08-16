@@ -146,7 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         MyPrefUtils.putString(MyPrefUtils.loginModel, loginModelToJson(value!));
                         Singleton.token = value.key;
                         Singleton.loginModel = value;
-                        Get.toNamed(DashboardScreen.tag);
+                        Get.offAllNamed(DashboardScreen.tag);
                       }
                     });
                   },
