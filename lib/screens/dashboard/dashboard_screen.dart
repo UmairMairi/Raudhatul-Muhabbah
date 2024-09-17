@@ -222,6 +222,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         _scaffoldKey.currentState?.closeEndDrawer();
                       },
                     ),
+                    ListTile(
+                      leading: Icon(Icons.delete,color: MyColors.whiteColor,),
+                      title: Text(
+                        'Delete Account',
+                        style: MyTextStyle.subTitle
+                            .copyWith(color: MyColors.whiteColor),
+                      ),
+                      onTap: () {
+                        MyPrefUtils.clearCaches().then((value) => Get.offAllNamed(LoginScreen.tag));
+                        _scaffoldKey.currentState?.closeEndDrawer();
+                      },
+                    ),
                     const Divider(
                       color: MyColors.whiteColor,
                       height: 1,
