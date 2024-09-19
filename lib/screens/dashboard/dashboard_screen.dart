@@ -19,6 +19,8 @@ import 'package:raudhatul_muhabbah/utils/constants.dart';
 import 'package:raudhatul_muhabbah/utils/my_styles.dart';
 import 'package:raudhatul_muhabbah/utils/widget_functions.dart';
 
+import 'btn_primary.dart';
+
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
 
@@ -223,15 +225,59 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       },
                     ),
                     ListTile(
-                      leading: Icon(Icons.delete,color: MyColors.whiteColor,),
+                      leading: const Icon(Icons.delete,color: MyColors.whiteColor,),
                       title: Text(
                         'Delete Account',
                         style: MyTextStyle.subTitle
                             .copyWith(color: MyColors.whiteColor),
                       ),
                       onTap: () {
-                        MyPrefUtils.clearCaches().then((value) => Get.offAllNamed(LoginScreen.tag));
-                        _scaffoldKey.currentState?.closeEndDrawer();
+                        WidgetFunction.showAlertDialog(
+                          titleText: "Attention!",
+                          infoText: "Delete account will remove all user related data from the system",
+                          extraDetails: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      onPressed: (){
+                                        Get.back();
+                                      },
+                                      textColor: MyColors.blackColor,
+                                      borderColor: MyColors.colorPrimaryDark,
+                                      backgroundColor: MyColors.backgroundColor,
+                                      title: "Cancel",
+                                      titleStyle: MyTextStyle.buttonTitle.copyWith(color: MyColors.blackColor),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10.0,),
+                                  Expanded(
+                                    child: PrimaryButton(
+                                      onPressed: (){
+                                        _scaffoldKey.currentState?.closeEndDrawer();
+                                        MyPrefUtils.clearCaches().then((value){
+                                          WidgetFunction.showAlertDialog(
+                                            titleText: "Attention!",
+                                            infoText: "Account deletion is in progress, Account will be fully deleted in 24 hours.",
+                                            onPressed: (){
+                                              Get.offAllNamed(LoginScreen.tag);
+                                            }
+                                          );
+                                        });
+                                      },
+                                      textColor: MyColors.whiteColor,
+                                      borderColor: Colors.transparent,
+                                      backgroundColor: MyColors.colorPrimary,
+                                      title: "Delete Account",
+                                      titleStyle: MyTextStyle.buttonTitle.copyWith(color: MyColors.whiteColor),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        );
                       },
                     ),
                     const Divider(
