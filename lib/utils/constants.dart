@@ -16,8 +16,8 @@ class Constants {
   static const String titleFirstName = "First Name";
   static const String titleLastName = "Last Name";
   static const String titleSignupEmail = "Email";
-  static const String titleAddress = "Address";
-  static const String titlePhone = "Phone";
+  static const String titleAddress = "Address (optional)";
+  static const String titlePhone = "Phone (optional)";
   static const String titleSignupPassword = "Password";
   static const String titleGender = "Select Gender";
   static const String btnSubmitTitle= "Submit";

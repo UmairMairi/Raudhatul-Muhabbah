@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -208,4 +209,13 @@ extension NullableStringExtention on String? {
       return null;
     }
   }
+
+  static String generateKenyanPhoneNumber() {
+    final random = math.Random();
+    String countryCode = '+254';
+    String prefix = random.nextBool() ? '7' : '1';
+    String number = List.generate(8, (_) => random.nextInt(10)).join();
+    return '$countryCode$prefix$number';
+  }
+
 }
