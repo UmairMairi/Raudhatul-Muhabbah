@@ -38,9 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
     controller.getTotalAchievements();
     controller.getLatestTargets();
     controller.getPrayerTimes();
-    controller
-        .getProfileDetails(id: "${Singleton.loginModel?.userId}")
-        .then((value) {
+    controller.getProfileDetails(id: "${Singleton.loginModel?.userId}").then((value) {
       controller.updateProfile(
           id: "${Singleton.loginModel?.userId}",
           fName: value?.firstName ?? "",

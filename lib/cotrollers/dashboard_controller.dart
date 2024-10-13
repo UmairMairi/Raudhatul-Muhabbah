@@ -42,14 +42,13 @@ class DashboardController extends BaseController {
         isHighestAchievementLoading.value = false;
         return highestAchieverModel.value;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ??
-            Constants.somethingWrong.tr}".showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       isHighestAchievementLoading.value = false;
       return null;
     } catch (e) {
       isHighestAchievementLoading.value = false;
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }
@@ -98,14 +97,13 @@ class DashboardController extends BaseController {
         isLatestTargetLoading.value = false;
         return latestTargetModel.value;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ??
-            Constants.somethingWrong.tr}".showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       isLatestTargetLoading.value = false;
       return null;
     } catch (e) {
       isLatestTargetLoading.value = false;
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }
@@ -150,14 +148,13 @@ class DashboardController extends BaseController {
         isBenefitsLoading.value = false;
         return benefitsModel.value;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ??
-            Constants.somethingWrong.tr}".showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       isBenefitsLoading.value = false;
       return null;
     } catch (e) {
       isBenefitsLoading.value = false;
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }
@@ -170,17 +167,14 @@ class DashboardController extends BaseController {
           url: ApiConstants.totalAchievements, token: Singleton.token);
       if (response.isSuccessful()) {
         totalAchievements.value =
-            response.body.toJson()?.getValueOfKey("total_achievement_value") ??
-                0;
+            response.body.toJson()?.getValueOfKey("total_achievement_value") ?? 0;
         return totalAchievements.value;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ??
-            Constants.somethingWrong.tr}"
-            .showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       return null;
     } catch (e) {
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }
@@ -194,14 +188,13 @@ class DashboardController extends BaseController {
       if (response.isSuccessful()) {
         profileModel.value = profileDetailsFromJson(response.body);
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ??
-            Constants.somethingWrong.tr}".showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       isProfileLoading.value = false;
       return profileModel.value;
     } catch (e) {
       isProfileLoading.value = false;
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }
@@ -241,14 +234,13 @@ class DashboardController extends BaseController {
         Get.back();
         return profileModel.value;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ??
-            Constants.somethingWrong.tr}".showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       isUpdateProfileLoading.value = false;
       return profileModel.value;
     } catch (e) {
       isUpdateProfileLoading.value = false;
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       return null;
     }
   }
@@ -301,12 +293,12 @@ class DashboardController extends BaseController {
         prayerTimeLoading.value = false;
         return prayerTimeModel.value;
       } else {
-        "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
+        // "${response.body.toJson()?.getValueOfKey("error") ?? Constants.somethingWrong.tr}".showSnackbar();
       }
       prayerTimeLoading.value = false;
       return null;
     } catch (e) {
-      Constants.somethingWrong.tr.showSnackbar();
+      // Constants.somethingWrong.tr.showSnackbar();
       prayerTimeLoading.value = false;
       return null;
     }
