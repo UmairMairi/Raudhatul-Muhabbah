@@ -143,13 +143,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         isLabelRequired: true,
                         keyboardType: TextInputType.streetAddress,
                         controller: addressController,
-                        validator: (val){
-                          if(val!= null && val.isEmpty){
-                            return Constants.enterValidAddress;
-                          }
-                          return null;
-
-                        },
+                        // validator: (val){
+                        //   if(val!= null && val.isEmpty){
+                        //     return Constants.enterValidAddress;
+                        //   }
+                        //   return null;
+                        //
+                        // },
 
                       ),
                     ),
@@ -166,13 +166,13 @@ class _SignupScreenState extends State<SignupScreen> {
                         isLabelRequired: true,
                         keyboardType: TextInputType.phone,
                         controller: phoneController,
-                        validator: (val){
-                          if(val!= null && val.isEmpty){
-                            return Constants.enterValidPhone;
-                          }
-                          return null;
-
-                        },
+                        // validator: (val){
+                        //   if(val!= null && val.isEmpty){
+                        //     return Constants.enterValidPhone;
+                        //   }
+                        //   return null;
+                        //
+                        // },
                       ),
                     ),
                     const SizedBox(
